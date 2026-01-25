@@ -1,0 +1,13 @@
+{"level":"info","message":"Szerver elindult a http://localhost:3000 címen","timestamp":"2026-01-21T10:30:01.060Z"}
+{"level":"error","message":"POST /api/konyvek 500 4.939 ms","timestamp":"2026-01-21T10:37:07.115Z"}
+{"level":"info","message":"Szerver elindult a http://localhost:3000 címen","timestamp":"2026-01-21T10:38:56.531Z"}
+{"level":"info","message":"Szerver elindult a http://localhost:3000 címen","timestamp":"2026-01-21T10:39:33.004Z"}
+{"level":"info","message":"POST /api/konyvek 201 8.951 ms","timestamp":"2026-01-21T10:39:37.814Z"}
+{"level":"info","message":"GET /api/konyvek 200 4.265 ms","timestamp":"2026-01-21T10:41:03.443Z"}
+{"level":"error","message":"GET /api/konyvek/5 500 1.523 ms","timestamp":"2026-01-21T10:41:16.589Z"}
+{"level":"info","message":"Szerver elindult a http://localhost:3000 címen","timestamp":"2026-01-21T10:43:23.625Z"}
+{"level":"info","message":"GET /api/konyvek/5 200 11.834 ms","timestamp":"2026-01-21T10:43:26.363Z"}
+{"level":"info","message":"PUT /api/konyvek/5 200 3.902 ms","timestamp":"2026-01-21T10:44:48.876Z"}
+{"level":"info","message":"PUT /api/konyvek/5 200 1.357 ms","timestamp":"2026-01-21T10:44:59.541Z"}
+{"level":"info","message":"DELETE /api/konyvek/5 204 4.182 ms","timestamp":"2026-01-21T10:46:10.464Z"}
+{"level":"info","message":"POST /api/konyvek 201 3.879 ms","timestamp":"2026-01-21T10:46:35.490Z"}

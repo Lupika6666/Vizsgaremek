@@ -1,0 +1,2 @@
+{"level":"error","message":"POST /api/konyvek 500 4.939 ms","timestamp":"2026-01-21T10:37:07.115Z"}
+{"level":"error","message":"GET /api/konyvek/5 500 1.523 ms","timestamp":"2026-01-21T10:41:16.589Z"}
