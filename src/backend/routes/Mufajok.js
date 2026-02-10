@@ -1,18 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const Konyv = require("../models/Konyv")
+const Mufaj = require("../models/Mufaj")
 
 router.get('/', (req, res) => {
-    Konyv.getAll((err, result) => {
-        if (err) {
-            return res.status(500).json({ error: err.message })
-        }
-        res.status(200).json(result)
-    })
-})
-
-router.get('/:id', (req, res) => {
-    Konyv.getById(req.params.id, (err, result) => {
+    Mufaj.getAll((err, result) => {
         if (err) {
             return res.status(500).json({ error: err.message })
         }
@@ -21,8 +12,8 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    const { cim, isbn, publikalas_ev, leiras, nyelv_id, szerzo_id, mufaj_id } = req.body
-    Konyv.create(cim, isbn, publikalas_ev, leiras, nyelv_id, szerzo_id, mufaj_id, (err, result) => {
+    const { nev } = req.body
+    Mufaj.create(nev, (err, result) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
@@ -31,8 +22,8 @@ router.post('/', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
-    const { cim, publikalas_ev, leiras, nyelv_id, szerzo_id, mufaj_id } = req.body
-    Konyv.update(req.params.id, cim, publikalas_ev, leiras, nyelv_id, szerzo_id, mufaj_id, (err, result) => {
+    const { nev } = req.body
+    Mufaj.update(req.params.id, nev, (err, result) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
@@ -41,7 +32,7 @@ router.put('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
-    Konyv.delete(req.params.id, (err, result) => {
+    Mufaj.delete(req.params.id, (err, result) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }

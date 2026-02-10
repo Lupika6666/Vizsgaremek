@@ -7,6 +7,9 @@ const { notFoundHandler, errorHandler } = require('./middleware/errorHandler')
 
 //Route importok hely
 const konyvekRoutes = require('./routes/konyvek')
+const szerzokRoutes = require('./routes/Szerzok')
+const nyelvekRoutes = require('./routes/Nyelvek')
+const mufajokRoutes = require('./routes/Mufajok')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -22,6 +25,9 @@ app.use(morgan(':method :url :status :response-time ms', {
 
 //Route helyek (itt hívjuk meg a kéréseket) 
 app.use('/api/konyvek', konyvekRoutes)
+app.use('/api/szerzok', szerzokRoutes)
+app.use('/api/nyelvek', nyelvekRoutes)
+app.use('/api/mufajok', mufajokRoutes)
 
 //Hibakezelés
 app.use(notFoundHandler);

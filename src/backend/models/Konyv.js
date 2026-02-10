@@ -3,14 +3,13 @@ const db = require('../config/database')
 class Konyv {
     constructor(data = {}) {
         this.id = data.id || null //AUTO-INCREMENT, PRYMARI-KEY
-        this.cim = data.cim || data.konyvcim || ''
-        this.szerzo = data.szerzo || data.konyvszerzo || ''
+        this.cim = data.cim || ''
         this.isbn = data.isbn //UNIQUE kell legyen
-        this.publikalas_ev = data.publikalas_ev || data.konyvpublikalas_ev || ''
-        this.leiras = data.leiras || data.konyvleiras || ''
-        this.kiado = data.kiado || data.konyvkiado || ''
-        this.nyelv = data.nyelv || data.konyvnyelv || ''
-        this.oldalszam = data.oldalszam || data.konyvoldalszam || ''
+        this.publikalas_ev = data.publikalas_ev  || ''
+        this.leiras = data.leiras || ''
+        this.nyelv_id = data.nyelv_id || null
+        this.szerzo_id = data.szerzo_id  || null
+        this.mufaj_id = data.mufaj_id || null
     }
 
     validate() {
@@ -19,15 +18,8 @@ class Konyv {
         if (!this.cim || this.cim.trim() === '') {
             errors.push('A Cím kötelező')
         }
-        if (this.cím.length > 50) {
+        if (this.cim.length > 50) {
             errors.push('A Cím maximum 50 karakter lehet')
-        }
-
-        if (!this.szerzo || this.szerzo.trim() === '') {
-            errors.push('A Szerzo kötelező')
-        }
-        if (this.szerzo.length > 50) {
-            errors.push('A Szerzo maximum 50 karakter lehet')
         }
 
         if (!this.isbn || this.isbn.trim() === '') {
@@ -40,6 +32,7 @@ class Konyv {
         if (!this.publikalas_ev || this.publikalas_ev.trim() === '') {
             errors.push('A publikálás éve kötelező')
         }
+
         if (this.publikalas_ev < new Date().getFullYear()) {
             errors.push('Adjon meg valós évszámot')
         }
@@ -51,25 +44,16 @@ class Konyv {
             errors.push('A Leiras maximum 255 karakter lehet')
         }
 
-        if (!this.kiado || this.kiado.trim() === '') {
-            errors.push('A Kiado kötelező')
-        }
-        if (this.kiado.length > 50) {
-            errors.push('A Kiado maximum 50 karakter lehet')
+        if (!this.szerzo_id || this.szerzo_id.trim() === '') {
+            errors.push('A Szerzo kötelező')
         }
 
-        if (!this.nyelv || this.nyelv.trim() === '') {
+        if (!this.nyelv_id || this.nyelv_id.trim() === '') {
             errors.push('A Nyelv kötelező')
         }
-        if (this.nyelv.length > 15) {
-            errors.push('A Nyelv maximum 15 karakter lehet')
-        }
 
-        if (!this.oldalszam || this.oldalszam.trim() === '') {
-            errors.push('Az oldalszám kötelező')
-        }
-        if (this.oldalszam <= 0) {
-            errors.push('Adjon meg valós oldalszámot')
+        if (this.mufaj_id || this.mufaj_id.trim() === '') {
+            errors.push('A Mufaj kötelező')
         }
 
         return {
@@ -82,34 +66,34 @@ class Konyv {
         return {
             id: this.id,
             cim: this.cim,
-            szerzo: this.szerzo,
             isbn: this.isbn,
             publikalas_ev: this.publikalas_ev,
             leiras: this.leiras,
-            kiado: this.kiado,
-            nyelv: this.nyelv,
-            oldalszam: this.oldalszam
+            nyelv_id: this.nyelv_id,
+            szerzo_id: this.szerzo_id,
+            mufaj_id: this.mufaj_id
+
         }
     }
 
     static getAll(callback) {
-        const sql = "SELECT * FROM konyvek"
+        const sql = "SELECT k.id, k.cim, k.isbn, k.publikalas_ev, k.leiras, n.nev AS nyelv, s.nev AS szerzo, m.nev AS mufaj FROM konyvek k JOIN nyelvek n ON k.nyelv_id = n.id JOIN szerzok s ON k.szerzo_id = s.id JOIN mufajok m ON k.mufaj_id = m.id"
         db.query(sql, [], callback)
     }
 
     static getById(id, callback) {
-        const sql = "SELECT * FROM konyvek WHERE id = ?"
+        const sql = "SELECT k.id, k.cim, k.isbn, k.publikalas_ev, k.leiras, n.nev AS nyelv, s.nev AS szerzo, m.nev AS mufaj FROM konyvek k JOIN nyelvek n ON k.nyelv_id = n.id JOIN szerzok s ON k.szerzo_id = s.id JOIN mufajok m ON k.mufaj_id = m.id WHERE id = ?"
         db.query(sql, [id], callback)
     }
 
-    static create(cim, szerzo, isbn, publikalas_ev, leiras, kiado, nyelv, oldalszam, callback) {
-        const sql = "INSERT INTO konyvek (cim, szerzo, isbn, publikalas_ev, leiras, kiado, nyelv, oldalszam) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
-        db.query(sql, [cim, szerzo, isbn, publikalas_ev, leiras, kiado, nyelv, oldalszam], callback)
+    static create(cim, isbn, publikalas_ev, leiras, nyelv_id, szerzo_id, mufaj_id, callback) {
+        const sql = "INSERT INTO konyvek (cim, isbn, publikalas_ev, leiras, nyelv_id, szerzo_id, mufaj_id) VALUES (?, ?, ?, ?, ?, ?, ?)"
+        db.query(sql, [cim, isbn, publikalas_ev, leiras, nyelv_id, szerzo_id, mufaj_id], callback)
     }
 
-    static update(id, cim, szerzo, publikalas_ev, leiras, kiado, nyelv, oldalszam, callback) {
-        const sql = "UPDATE konyvek SET cim = ?, szerzo = ?, publikalas_ev = ?, leiras = ?, kiado = ?, nyelv = ?, oldalszam = ? WHERE id = ?"
-        db.query(sql, [cim, szerzo, publikalas_ev, leiras, kiado, nyelv, oldalszam, id], callback)
+    static update(id, cim, publikalas_ev, leiras, nyelv_id, szerzo_id, mufaj_id, callback) {
+        const sql = "UPDATE konyvek SET cim = ?, publikalas_ev = ?, leiras = ?, nyelv_id = ?, szerzo_id = ?, mufaj_id = ? WHERE id = ?"
+        db.query(sql, [cim, publikalas_ev, leiras, nyelv_id, szerzo_id, mufaj_id, id], callback)
     }
 
     static delete(id, callback) {
