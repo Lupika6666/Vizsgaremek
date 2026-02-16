@@ -82,7 +82,7 @@ class Konyv {
     }
 
     static getById(id, callback) {
-        const sql = "SELECT k.id, k.cim, k.isbn, k.publikalas_ev, k.leiras, n.nev AS nyelv, s.nev AS szerzo, m.nev AS mufaj FROM konyvek k JOIN nyelvek n ON k.nyelv_id = n.id JOIN szerzok s ON k.szerzo_id = s.id JOIN mufajok m ON k.mufaj_id = m.id WHERE id = ?"
+        const sql = "SELECT k.id, k.cim, k.isbn, k.publikalas_ev, k.leiras, n.nev AS nyelv, s.nev AS szerzo, m.nev AS mufaj FROM konyvek k JOIN nyelvek n ON k.nyelv_id = n.id JOIN szerzok s ON k.szerzo_id = s.id JOIN mufajok m ON k.mufaj_id = m.id WHERE k.id = ?"
         db.query(sql, [id], callback)
     }
 
