@@ -21,18 +21,35 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    const { cim, isbn, publikalas_ev, leiras, nyelv_id, szerzo_id, mufaj_id } = req.body
-    Konyv.create(cim, isbn, publikalas_ev, leiras, nyelv_id, szerzo_id, mufaj_id, (err, result) => {
+    const { cim, szerzo, isbn, publikalas_ev, leiras, kiado, nyelv, oldalszam } = req.body
+    
+    // Adatok validálása
+    const konyv = new Konyv({
+        cim, szerzo, isbn, publikalas_ev, leiras, kiado, nyelv, oldalszam
+    })
+    
+    const validation = konyv.validate()
+    if (!validation.isValid) {
+        return res.status(400).json({ 
+            error: 'Validációs hiba',
+            errors: validation.errors 
+        })
+    }
+    
+    Konyv.create(cim, szerzo, isbn, publikalas_ev, leiras, kiado, nyelv, oldalszam, (err, result) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
-        res.status(201).json(result);
+        res.status(201).json({ 
+            message: 'Könyv sikeresen létrehozva',
+            id: result.insertId 
+        });
     })
 })
 
 router.put('/:id', (req, res) => {
-    const { cim, publikalas_ev, leiras, nyelv_id, szerzo_id, mufaj_id } = req.body
-    Konyv.update(req.params.id, cim, publikalas_ev, leiras, nyelv_id, szerzo_id, mufaj_id, (err, result) => {
+    const { cim, szerzo, publikalas_ev, leiras, kiado, nyelv, oldalszam } = req.body
+    Konyv.update(req.params.id, cim, szerzo, publikalas_ev, leiras, kiado, nyelv, oldalszam, (err, result) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
@@ -45,7 +62,10 @@ router.delete('/:id', (req, res) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
-        res.status(204).json(result)
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: 'Könyv nem található' })
+        }
+        res.status(200).json({ message: 'Könyv sikeresen törlve' })
     })
 })
 

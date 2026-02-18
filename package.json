@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "content-disposition": "^1.0.1",
+    "express": "^5.2.1",
+    "finalhandler": "^2.1.1",
+    "http-errors": "^2.0.1",
+    "iconv-lite": "^0.7.2",
+    "mime-types": "^3.0.2",
+    "path-to-regexp": "^8.3.0",
+    "send": "^1.2.1",
+    "serve-static": "^2.2.1"
+  }
+}
