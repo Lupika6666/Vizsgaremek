@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     })
 })
 
-router.getById('/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     Olvaso.getById(req.params.id, (err, result) => {
         if (err) {
             return res.status(500).json({ error: err.message })

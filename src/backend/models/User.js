@@ -35,27 +35,27 @@ class User {
     }
 
     static getByNev(nev, callback) {
-        const sql = "SELECT * FROM users WHERE nev = ?"
+        const sql = "SELECT * FROM userek WHERE nev = ?"
         db.query(sql, [nev], callback)
     }
 
     static login(nev, jelszo, callback) {
-        const sql = "SELECT * FROM users WHERE nev = ? AND jelszo = ?"
+        const sql = "SELECT * FROM userek WHERE nev = ? AND jelszo = ?"
         db.query(sql, [nev, jelszo], callback)
     }
 
     static register(nev, jelszo, olvaso_id, callback) {
-        const sql = "INSERT INTO users (nev, jelszo, role, olvaso_id) VALUES (?, ?, \"user\", ?)"
+        const sql = "INSERT INTO userek (nev, jelszo, role, olvaso_id) VALUES (?, ?, \"user\", ?)"
         db.query(sql, [nev, jelszo, olvaso_id], callback)
     }
 
     static update(nev, ujnev, jelszo, olvaso_id, callback) {
-        const sql = "UPDATE users SET nev = ?, jelszo = ?, olvaso_id = ? WHERE nev = ?"
+        const sql = "UPDATE userek SET nev = ?, jelszo = ?, olvaso_id = ? WHERE nev = ?"
         db.query(sql, [ujnev, jelszo, olvaso_id, nev], callback)
     }
 
     static delete(nev, callback) {
-        const sql = "DELETE FROM users WHERE nev = ?"
+        const sql = "DELETE FROM userek WHERE nev = ?"
         db.query(sql, [nev], callback)
     }
 }
