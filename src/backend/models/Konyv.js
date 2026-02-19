@@ -18,6 +18,7 @@ class Konyv {
         if (!this.cim || this.cim.trim() === '') {
             errors.push('A Cím kötelező')
         }
+
         if (this.cim.length > 50) {
             errors.push('A Cím maximum 50 karakter lehet')
         }

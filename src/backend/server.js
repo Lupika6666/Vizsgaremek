@@ -7,10 +7,11 @@ const { notFoundHandler, errorHandler } = require('./middleware/errorHandler')
 
 //Route importok hely
 const konyvekRoutes = require('./routes/konyvek')
-const szerzokRoutes = require('./routes/Szerzok')
-const nyelvekRoutes = require('./routes/Nyelvek')
-const mufajokRoutes = require('./routes/Mufajok')
-const peldanyokRoutes = require('./routes/Peldanyok')
+const szerzokRoutes = require('./routes/szerzok')
+const nyelvekRoutes = require('./routes/nyelvek')
+const mufajokRoutes = require('./routes/mufajok')
+const peldanyokRoutes = require('./routes/peldanyok')
+const kolcsonzesekRoutes = require('./routes/kolcsonzesek')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -30,6 +31,7 @@ app.use('/api/szerzok', szerzokRoutes)
 app.use('/api/nyelvek', nyelvekRoutes)
 app.use('/api/mufajok', mufajokRoutes)
 app.use('/api/peldanyok', peldanyokRoutes)
+app.use('/api/kolcsonzesek', kolcsonzesekRoutes)
 
 //Hibakezelés
 app.use(notFoundHandler);
