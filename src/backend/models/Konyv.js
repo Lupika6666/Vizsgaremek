@@ -2,9 +2,9 @@ const db = require('../config/database')
 
 class Konyv {
     constructor(data = {}) {
-        this.id = data.id || null //AUTO-INCREMENT, PRYMARI-KEY
+        this.id = data.id || null
         this.cim = data.cim || ''
-        this.isbn = data.isbn //UNIQUE kell legyen
+        this.isbn = data.isbn
         this.publikalas_ev = data.publikalas_ev  || ''
         this.leiras = data.leiras || ''
         this.nyelv_id = data.nyelv_id || null

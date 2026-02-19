@@ -2,7 +2,7 @@ const db = require('../config/database')
 
 class Peldany {
     constructor(data = {}) {
-        this.id = data.id || null //AUTO-INCREMENT, PRYMARI-KEY
+        this.id = data.id || null
         this.hely = data.hely || ''
         this.konyv_id = data.konyv_id || null
     }

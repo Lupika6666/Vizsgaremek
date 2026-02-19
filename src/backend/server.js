@@ -12,6 +12,7 @@ const nyelvekRoutes = require('./routes/nyelvek')
 const mufajokRoutes = require('./routes/mufajok')
 const peldanyokRoutes = require('./routes/peldanyok')
 const kolcsonzesekRoutes = require('./routes/kolcsonzesek')
+const olvasokRoutes = require('./routes/olvasok')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -32,6 +33,7 @@ app.use('/api/nyelvek', nyelvekRoutes)
 app.use('/api/mufajok', mufajokRoutes)
 app.use('/api/peldanyok', peldanyokRoutes)
 app.use('/api/kolcsonzesek', kolcsonzesekRoutes)
+app.use('/api/olvasok', olvasokRoutes)
 
 //Hibakezelés
 app.use(notFoundHandler);
