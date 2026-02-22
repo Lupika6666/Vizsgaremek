@@ -15,15 +15,15 @@ export const languageApi = {
         return language;
     },
 
-    create: async (language) => await api.post("/nyelvek",
+    create: async (languageName) => await api.post("/nyelvek",
         {
-            nev: language.nev
+            nev: languageName
         }
     ),
 
-    update: async (id, language) => await api.put(`/nyelvek/${id}`,
+    update: async (id, languageName) => await api.put(`/nyelvek/${id}`,
         {
-            nev: language.nev
+            nev: languageName
         }
     ),
 

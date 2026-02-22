@@ -14,15 +14,15 @@ export const genreApi = {
         return genre;
     },
 
-    create: async (genre) => await api.post("/mufajok",
+    create: async (genreName) => await api.post("/mufajok",
         {
-            nev: genre.nev
+            nev: genreName
         }
     ),
 
-    update: async (id, genre) => await api.put(`/mufajok/${id}`,
+    update: async (id, genreName) => await api.put(`/mufajok/${id}`,
         {
-            nev: genre.nev
+            nev: genreName
         }
     ),
 

@@ -16,8 +16,17 @@ export function NavigationBar() {
                                 <NavLink className="nav-link" to="/">Főoldal</NavLink>
                             </li>
 
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/konyvek">Könyvek</NavLink>
+                            <li className="nav-item dropdown">
+                                <Link className="nav-link dropdown-toggle" to="/konyvek" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Könyvek
+                                </Link>
+                                <ul className="dropdown-menu">
+                                    <li><Link className="dropdown-item" to="/konyvek">Könyvek</Link></li>
+                                    <li><Link className="dropdown-item" to="/peldanyok">Példányok</Link></li>
+                                    <li><Link className="dropdown-item" to="/nyelvek">Nyelvek</Link></li>
+                                    <li><Link className="dropdown-item" to="/szerzok">Szerzők</Link></li>
+                                    <li><Link className="dropdown-item" to="/mufajok">Műfajok</Link></li>
+                                </ul>
                             </li>
 
                             <li className="nav-item">
@@ -27,6 +36,8 @@ export function NavigationBar() {
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/olvasok">Olvasók</NavLink>
                             </li>
+
+                            
 
                         </ul>
                     </div>

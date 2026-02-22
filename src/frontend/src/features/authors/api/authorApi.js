@@ -15,15 +15,15 @@ export const authorApi = {
         return author;
     },
 
-    create: async (author) => await api.post("/szerzok",
+    create: async (authorName) => await api.post("/szerzok",
         {
-            nev: author.nev
+            nev: authorName
         }
     ),
 
-    update: async (id, author) => await api.put(`/szerzok/${id}`,
+    update: async (id, authorName) => await api.put(`/szerzok/${id}`,
         {
-            nev: author.nev
+            nev: authorName
         }
     ),
 
