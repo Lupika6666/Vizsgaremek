@@ -35,15 +35,20 @@ class Peldany {
             konyv_id: this.konyv_id
         }
     }
-
+    //TODO Valószínű szükségetelen (törlésre kerül majd)
     static getAll(callback) {
         const sql = 'SELECT * FROM peldanyok'
         db.query(sql, [], callback)
     }
-
+    //TODO Valószínű szükségetelen (törlésre kerül majd)
     static getById(id, callback) {
         const sql = 'SELECT * FROM peldanyok WHERE id = ?'
         db.query(sql, [id], callback)
+    }
+    //TODO a konkrét könyvhöz tartozó példányok lekérdezése
+    static getByKonyvId(konyv_id, callback) {
+        const sql = 'SELECT * FROM peldanyok WHERE konyv_id = ?'
+        db.query(sql, [konyv_id], callback)
     }
 
     static create(hely, konyv_id, callback) {

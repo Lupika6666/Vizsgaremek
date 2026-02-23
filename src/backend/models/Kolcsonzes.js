@@ -65,6 +65,11 @@ class Kolcsonzes {
         const query = 'SELECT * FROM kolcsonzesek WHERE id = ?'
         db.query(query, [id], callback)
     }
+    //TODO a konkrét olvasóhoz tartozó kölcsönzések lekérdezése
+    static getByOlvasoId(olvaso_id, callback) {
+        const query = 'SELECT * FROM kolcsonzesek WHERE olvaso_id = ?'
+        db.query(query, [olvaso_id], callback)
+    }
 
     static create(kolcsonzes_ideje, hatarido, peldany_id, olvaso_id, callback) {
         const query = 'INSERT INTO kolcsonzesek (kolcsonzes_ideje, hatarido, peldany_id, olvaso_id) VALUES (?, ?, ?, ?)'

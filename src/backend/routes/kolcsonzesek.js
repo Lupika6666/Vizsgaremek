@@ -19,6 +19,15 @@ router.get('/:id', (req, res) => {
         res.status(200).json(result)
     })
 })
+//TODO a konkrét olvasóhoz tartozó kölcsönzések lekérdezése
+router.get('/:kartyaszam', (req, res) => {
+    Kolcsonzes.getByOlvasoId(req.params.kartyaszam, (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: err.message })
+        }
+        res.status(200).json(result)
+    })
+})
 
 router.post('/', (req, res) => {
     const { kolcsonzes_ideje, hatarido, peldany_id, olvaso_id } = req.body
