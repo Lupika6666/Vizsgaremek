@@ -57,27 +57,27 @@ class Kolcsonzes {
     }
 
     static getAll(callback) {
-        const query = 'SELECT * FROM kolcsonzes'
+        const query = 'SELECT * FROM kolcsonzesek'
         db.query(query, [], callback)
     }
 
     static getById(id, callback) {
-        const query = 'SELECT * FROM kolcsonzes WHERE id = ?'
+        const query = 'SELECT * FROM kolcsonzesek WHERE id = ?'
         db.query(query, [id], callback)
     }
 
     static create(kolcsonzes_ideje, hatarido, peldany_id, olvaso_id, callback) {
-        const query = 'INSERT INTO kolcsonzes (kolcsonzes_ideje, hatarido, peldany_id, olvaso_id) VALUES (?, ?, ?, ?)'
+        const query = 'INSERT INTO kolcsonzesek (kolcsonzes_ideje, hatarido, peldany_id, olvaso_id) VALUES (?, ?, ?, ?)'
         db.query(query, [kolcsonzes_ideje, hatarido, peldany_id, olvaso_id], callback)
     }
 
     static update(id, kolcsonzes_ideje, hatarido, peldany_id, olvaso_id, callback) {
-        const query = 'UPDATE kolcsonzes SET kolcsonzes_ideje = ?, hatarido = ?, peldany_id = ?, olvaso_id = ? WHERE id = ?'
+        const query = 'UPDATE kolcsonzesek SET kolcsonzes_ideje = ?, hatarido = ?, peldany_id = ?, olvaso_id = ? WHERE id = ?'
         db.query(query, [kolcsonzes_ideje, hatarido, peldany_id, olvaso_id, id], callback)
     }
 
     static delete(id, callback) {
-        const query = 'DELETE FROM kolcsonzes WHERE id = ?'
+        const query = 'DELETE FROM kolcsonzesek WHERE id = ?'
         db.query(query, [id], callback)
     }
 }

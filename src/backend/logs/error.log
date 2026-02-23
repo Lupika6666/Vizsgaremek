@@ -1,2 +1,11 @@
 {"level":"error","message":"POST /api/konyvek 500 4.939 ms","timestamp":"2026-01-21T10:37:07.115Z"}
 {"level":"error","message":"GET /api/konyvek/5 500 1.523 ms","timestamp":"2026-01-21T10:41:16.589Z"}
+{"level":"error","message":"POST /api/users/register 500 1.729 ms","timestamp":"2026-02-19T17:41:17.616Z"}
+{"ip":"::1","level":"warn","message":"404 - Nem található: POST /api/users/register","timestamp":"2026-02-19T17:44:09.849Z","userAgent":"PostmanRuntime/7.37.3"}
+{"level":"warn","message":"POST /api/users/register 404 1.192 ms","timestamp":"2026-02-19T17:44:09.850Z"}
+{"level":"error","message":"POST /api/userek/register 500 1.091 ms","timestamp":"2026-02-19T17:44:21.848Z"}
+{"level":"error","message":"POST /api/userek/register 500 5.459 ms","timestamp":"2026-02-19T17:44:33.454Z"}
+{"ip":"::1","level":"warn","message":"404 - Nem található: GET /api/userek/login","timestamp":"2026-02-19T17:50:49.267Z","userAgent":"PostmanRuntime/7.37.3"}
+{"level":"warn","message":"GET /api/userek/login 404 0.478 ms","timestamp":"2026-02-19T17:50:49.267Z"}
+{"level":"warn","message":"GET /api/userek/me 401 0.134 ms","timestamp":"2026-02-19T17:52:52.202Z"}
+{"level":"warn","message":"GET /api/userek/me 401 0.130 ms","timestamp":"2026-02-19T17:52:53.680Z"}

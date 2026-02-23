@@ -2,6 +2,15 @@ const express = require('express')
 const router = express.Router()
 const User = require("../models/User")
 
+// Session-based authentication middleware
+function requireAuth(req, res, next) {
+    if (req.session && req.session.user) {
+        next()
+    } else {
+        res.status(401).json({ error: 'Not authenticated' })
+    }
+}
+
 router.post('/login', (req, res) => {
     const { nev, jelszo } = req.body
     User.login(nev, jelszo, (err, result) => {
@@ -11,8 +20,29 @@ router.post('/login', (req, res) => {
         if (result.length === 0) {
             return res.status(401).json({ error: "Invalid credentials" })
         }
-        res.status(200).json(result[0])
+        // Store user info in session
+        req.session.user = {
+            nev: result[0].nev,
+            role: result[0].role,
+            jelszo: result[0].jelszo,
+            olvaso_id: result[0].olvaso_id
+        }
+        res.status(200).json({ message: 'Login successful', user: req.session.user })
     })
+})
+
+router.post('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.status(500).json({ error: 'Logout failed' })
+        }
+        res.status(200).json({ message: 'Logout successful' })
+    })
+})
+
+// Example protected route
+router.get('/me', requireAuth, (req, res) => {
+    res.status(200).json({ user: req.session.user })
 })
 
 router.post('/register', (req, res) => {
@@ -25,21 +55,9 @@ router.post('/register', (req, res) => {
     })
 })
 
-router.get('/:nev', (req, res) => {
-    User.getByNev(req.params.nev, (err, result) => {
-        if (err) {
-            return res.status(500).json({ error: err.message })
-        }
-        if (result.length === 0) {
-            return res.status(404).json({ error: "User not found" })
-        }
-        res.status(200).json(result[0])
-    })
-})
-
-router.put('/:nev', (req, res) => {
-    const { ujnev, jelszo, olvaso_id }                                                                                               = req.body
-    User.update(req.params.nev, ujnev, jelszo, olvaso_id, (err, result) => {
+router.put('/update', requireAuth, (req, res) => {
+    const { ujnev, jelszo, olvaso_id } = req.body
+    User.update(req.session.user.nev, ujnev, jelszo, olvaso_id, (err, result) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
@@ -47,8 +65,8 @@ router.put('/:nev', (req, res) => {
     })
 })
 
-router.delete('/:nev', (req, res) => {
-    User.delete(req.params.nev, (err, result) => {
+router.delete('/delete', requireAuth, (req, res) => {
+    User.delete(req.session.user.user, (err, result) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }

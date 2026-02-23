@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const corsMiddleware = require('./middleware/cors')
 const logger = require('./config/logger')
 const { notFoundHandler, errorHandler } = require('./middleware/errorHandler')
+const session = require('express-session')
 
 //Route importok hely
 const konyvekRoutes = require('./routes/konyvek')
@@ -21,6 +22,12 @@ const port = process.env.PORT || 3000
 //Middlewarek helye
 app.use(express.json())
 app.use(corsMiddleware)
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'mysecret',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false, httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }
+}))
 
 //HTTP kérés loggolás
 app.use(morgan(':method :url :status :response-time ms', {
@@ -35,7 +42,7 @@ app.use('/api/mufajok', mufajokRoutes)
 app.use('/api/peldanyok', peldanyokRoutes)
 app.use('/api/kolcsonzesek', kolcsonzesekRoutes)
 app.use('/api/olvasok', olvasokRoutes)
-app.use('/api/users', userRoutes)
+app.use('/api/userek', userRoutes)
 
 //Hibakezelés
 app.use(notFoundHandler);
