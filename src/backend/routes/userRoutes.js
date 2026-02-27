@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const userController = require('../controllers/userController')
+const { methodNotAllowed } = require('../utils/error')
 
 //TODO Session-based authentication middleware ideiglenes!!!
 function requireAuth(req, res, next) {
@@ -17,9 +18,6 @@ router.get('/me', requireAuth, userController.getMe)
 router.post('/register', userController.registerUser)
 router.put('/update', requireAuth, userController.putUser)
 router.delete('/delete', requireAuth, userController.deleteUser)
-
-router.all('/', (req, res) => {
-    res.status(405).json({ error: "Method Not Allowed" });
-});
+router.all('/', methodNotAllowed)
 
 module.exports = router
