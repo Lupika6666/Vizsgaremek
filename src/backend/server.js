@@ -15,6 +15,7 @@ const peldanyRoutes = require('./routes/bookCopyRoutes')
 const rentalRoutes = require('./routes/rentalRoutes')
 const readerRoutes = require('./routes/readerRoutes')
 const userRoutes = require('./routes/userRoutes')
+const swaggerRoutes = require('./routes/swaggerRoutes')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -39,6 +40,7 @@ app.use('/api/peldanyok', peldanyRoutes)
 app.use('/api/kolcsonzesek', rentalRoutes)
 app.use('/api/olvasok', readerRoutes)
 app.use('/api/userek', userRoutes)
+app.use('/api/docs', swaggerRoutes)
 
 //Hibakezelés
 app.use(notFoundHandler);
