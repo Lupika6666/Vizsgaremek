@@ -4,7 +4,6 @@ const morgan = require('morgan')
 const corsMiddleware = require('./middleware/cors')
 const logger = require('./config/logger')
 const { notFoundHandler, errorHandler } = require('./middleware/errorHandler')
-const sessionConfig = require('config/session')
 
 //Route importok hely
 const bookRoutes = require('./routes/bookRoutes')
@@ -23,8 +22,6 @@ const port = process.env.PORT || 3000
 //Middlewarek helye
 app.use(express.json())
 app.use(corsMiddleware)
-//TODO Session kezelés, de még nem végleges
-app.use(sessionConfig)
 
 //HTTP kérés loggolás
 app.use(morgan(':method :url :status :response-time ms', {
