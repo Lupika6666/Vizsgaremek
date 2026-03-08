@@ -7,10 +7,10 @@ const { notFoundHandler, errorHandler } = require('./middleware/errorHandler')
 
 //Route importok hely
 const bookRoutes = require('./routes/bookRoutes')
-const szerzoRoutes = require('./routes/authorRoutes')
+const authorRoutes = require('./routes/authorRoutes')
 const languageRoutes = require('./routes/languageRoutes')
 const genreRoutes = require('./routes/genreRoutes')
-const peldanyRoutes = require('./routes/bookCopyRoutes')
+const bookCopyRoutes = require('./routes/bookCopyRoutes')
 const rentalRoutes = require('./routes/rentalRoutes')
 const readerRoutes = require('./routes/readerRoutes')
 const userRoutes = require('./routes/userRoutes')
@@ -30,18 +30,18 @@ app.use(morgan(':method :url :status :response-time ms', {
 
 //Route helyek (itt hívjuk meg a kéréseket) 
 app.use('/api/konyvek', bookRoutes)
-app.use('/api/szerzok', szerzoRoutes)
+app.use('/api/szerzok', authorRoutes)
 app.use('/api/nyelvek', languageRoutes)
 app.use('/api/mufajok', genreRoutes)
-app.use('/api/peldanyok', peldanyRoutes)
+app.use('/api/peldanyok', bookCopyRoutes)
 app.use('/api/kolcsonzesek', rentalRoutes)
 app.use('/api/olvasok', readerRoutes)
 app.use('/api/userek', userRoutes)
 app.use('/api/docs', swaggerRoutes)
 
 //Hibakezelés
-app.use(notFoundHandler);
-app.use(errorHandler);
+app.use(notFoundHandler)
+app.use(errorHandler)
 
 app.listen(port, () => {
     logger.info(`Szerver elindult a http://localhost:${port} címen`)

@@ -18,7 +18,7 @@ const bookController = {
             if (err) {
                 return next(err)
             }
-            if (result.affectedRows < 1) {
+            if (result.length < 1) {
                 return res.status(404).json({
                     "valasz": "Nincs ilyen könyv!"
                 })
