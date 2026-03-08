@@ -1,4 +1,4 @@
-const Book = require("../models/bookModel");
+const Book = require("../models/bookModel")
 
 const bookController = {
     getAllBook: (req, res, next) => {
@@ -9,8 +9,8 @@ const bookController = {
             res.status(200).json({
                 "valasz": "Sikeres lekérdezés!",
                 "adatok": result
-            });
-        });
+            })
+        })
     },
 
     getBookById: (req, res, next) => {
@@ -19,15 +19,15 @@ const bookController = {
                 return next(err)
             }
             if (result.affectedRows < 1) {
-                return res.status(404).json(
-                    { "valasz": "Nincs ilyen könyv!" }
-                );
+                return res.status(404).json({
+                    "valasz": "Nincs ilyen könyv!"
+                })
             }
             res.status(200).json({
                 "valasz": "Sikeres lekérdezés!",
                 "adatok": result
-            });
-        });
+            })
+        })
     },
 
     postBook: (req, res, next) => {
@@ -48,8 +48,8 @@ const bookController = {
                     "szerzo_id": szerzo_id,
                     "mufaj_id": mufaj_id
                 }
-            });
-        });
+            })
+        })
     },
 
     putBook: (req, res, next) => {
@@ -59,9 +59,9 @@ const bookController = {
                 return next(err)
             }
             if (result.affectedRows < 1) {
-                return res.status(404).json(
-                    { "valasz": "Nincs ilyen könyv!" }
-                );
+                return res.status(404).json({
+                    "valasz": "Nincs ilyen könyv!"
+                })
             }
             res.status(200).json({
                 "valasz": "Sikeres módosítás!",
@@ -74,8 +74,8 @@ const bookController = {
                     "szerzo_id": szerzo_id,
                     "mufaj_id": mufaj_id
                 }
-            });
-        });
+            })
+        })
     },
 
     deleteBook: (req, res, next) => {
@@ -84,16 +84,16 @@ const bookController = {
                 return next(err)
             }
             if (result.affectedRows < 1) {
-                return res.status(404).json(
-                    { "valasz": "Nincs ilyen könyv!" }
-                )
+                return res.status(404).json({
+                    "valasz": "Nincs ilyen könyv!"
+                })
             }
             res.status(204).json({
                 "valasz": "Sikeres törlés!"
-            });
-        });
+            })
+        })
     }
-};
+}
 
-module.exports = bookController;
+module.exports = bookController
 

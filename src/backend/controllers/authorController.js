@@ -1,4 +1,4 @@
-const Szerzo = require("../models/authorModel");
+const Szerzo = require("../models/authorModel")
 
 const authorController = {
     getAllAuthor: (req, res, next) => {
@@ -19,7 +19,7 @@ const authorController = {
             if (err) {
                 if (err.code === "ER_DUP_ENTRY") {
                     return res.status(400).json({
-                        "valasz": "A szerző már korábban hozzá lett adva!" });
+                        "valasz": "A szerző már korábban hozzá lett adva!" })
                 }
                 return next(err)
             }
@@ -44,9 +44,9 @@ const authorController = {
                 return next(err)
             }
             if (result.affectedRows < 1) {
-                return res.status(404).json(
-                    { "valasz": "Nincs ilyen szerző!" }
-                );
+                return res.status(404).json({
+                    "valasz": "Nincs ilyen szerző!"
+                });
             }
             res.status(200).json({
                 "valasz": "Sikeres módosítás!",
@@ -64,9 +64,9 @@ const authorController = {
                 return next(err)
             }
             if (result.affectedRows < 1) {
-                return res.status(404).json(
-                    { "valasz": "Nincs ilyen szerző!" }
-                )
+                return res.status(404).json({
+                    "valasz": "Nincs ilyen szerző!"
+                })
             }
             res.status(204).json({
                 "valasz": "Sikeres törlés!"
@@ -75,5 +75,5 @@ const authorController = {
     }
 }
 
-module.exports = authorController;
+module.exports = authorController
 

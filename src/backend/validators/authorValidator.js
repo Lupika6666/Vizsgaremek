@@ -1,5 +1,5 @@
-const { body, param} = require("express-validator");
-const { validateRequest } = require("../utils/validationHelper");
+const { body, param} = require("express-validator")
+const { validateRequest } = require("../utils/validationHelper")
 
 const authorPostValidator = [
     body("nev").isString().trim().isEmpty().withMessage("A név megadása kötelező!"),
