@@ -34,12 +34,12 @@ const authorController = {
     },
 
     putAuthor: (req, res, next) => {
-        const { nev } = req.body;
+        const { nev } = req.body
         Szerzo.updateAuthor(req.params.id, nev, (err, result) => {
             if (err) {
                 if (err.code === "ER_DUP_ENTRY") {
                     return res.status(400).json({
-                        "valasz": "Ilyen nevű szerző már hozzá lett adva!" });
+                        "valasz": "Ilyen nevű szerző már hozzá lett adva!" })
                 }
                 return next(err)
             }

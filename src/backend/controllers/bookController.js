@@ -31,7 +31,7 @@ const bookController = {
     },
 
     postBook: (req, res, next) => {
-        const { cim, isbn, publikalas_ev, leiras, nyelv_id, szerzo_id, mufaj_id } = req.body;
+        const { cim, isbn, publikalas_ev, leiras, nyelv_id, szerzo_id, mufaj_id } = req.body
         Book.insertBook(cim, isbn, publikalas_ev, leiras, nyelv_id, szerzo_id, mufaj_id, (err, result) => {
             if (err) {
                 return next(err)
@@ -53,7 +53,7 @@ const bookController = {
     },
 
     putBook: (req, res, next) => {
-        const { cim, publikalas_ev, leiras, nyelv_id, szerzo_id, mufaj_id } = req.body;
+        const { cim, publikalas_ev, leiras, nyelv_id, szerzo_id, mufaj_id } = req.body
         Book.updateBook(req.params.id, cim, publikalas_ev, leiras, nyelv_id, szerzo_id, mufaj_id, (err, result) => {
             if (err) {
                 return next(err)

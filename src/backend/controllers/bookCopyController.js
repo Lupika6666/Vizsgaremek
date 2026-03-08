@@ -31,7 +31,7 @@ const bookCopyController = {
     },
 
     postBookCopy: (req, res, next) => {
-        const { hely, konyv_id } = req.body;
+        const { hely, konyv_id } = req.body
         BookCopy.insertBookCopy(hely, konyv_id, (err, result) => {
             if (err) {
                 return next(err)
@@ -48,7 +48,7 @@ const bookCopyController = {
     },
 
     putBookCopy: (req, res, next) => {
-        const { hely, konyv_id } = req.body;
+        const { hely, konyv_id } = req.body
         BookCopy.updateBookCopy(req.params.id, hely, konyv_id, (err, result) => {
             if (err) {
                 return next(err)
