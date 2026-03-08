@@ -3,14 +3,13 @@ const router = express.Router()
 const Kolcsonzes = require("../models/rentalModel")
 const rentalController = require('../controllers/rentalController')
 const { methodNotAllowed } = require('../utils/error')
+const {rentalGetByIdValidator, rentalPostValidator, rentalPutValidator, rentalDeleteValidator} = require("../validators/rentalValidator");
 
 router.get('/', rentalController.getAllRental)
-router.get('/:id', rentalController.getRentalById)
-//TODO a konkrét olvasóhoz tartozó kölcsönzések lekérdezés
-router.get('/:kartyaszam', rentalController.getRentalByReaderId)
-router.post('/', rentalController.postRental)
-router.put ('/:id', rentalController.putRental)
-router.delete('/:id', rentalController.deleteRental)
+router.get('/:id', rentalGetByIdValidator, rentalController.getRentalById)
+router.post('/', rentalPostValidator, rentalController.postRental)
+router.put ('/:id', rentalPutValidator, rentalController.putRental)
+router.delete('/:id', rentalDeleteValidator, rentalController.deleteRental)
 router.all('/', methodNotAllowed)
 
 module.exports = router

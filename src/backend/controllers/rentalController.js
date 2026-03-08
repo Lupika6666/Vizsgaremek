@@ -1,31 +1,33 @@
-const Rental = require("../models/rentalModel");
+const Rental = require("../models/rentalModel")
 
 const rentalController = {
 
     getAllRental: (req, res, next) => {
         Rental.selectAllRental((err, result) => {
             if (err) {
-                return res.status(500).json({error: err.message})
+                return next(err)
             }
-            res.status(200).json(result)
+            res.status(200).json({
+                "valasz": "Sikeres lekérdezés!",
+                "adatok": result
+            })
         })
     },
 
     getRentalById: (req, res, next) => {
         Rental.selectRentalById(req.params.id, (err, result) => {
             if (err) {
-                return res.status(500).json({error: err.message})
+                return next(err)
             }
-            res.status(200).json(result)
-        })
-    },
-
-    getRentalByReaderId: (req, res, next) => {
-        Rental.selectRentalByReaderId(req.params.kartyaszam, (err, result) => {
-            if (err) {
-                return res.status(500).json({error: err.message})
+            if (result.length < 1) {
+                return res.status(404).json({
+                    "valasz": "Nincs ilyen kölcsönzés!"
+                })
             }
-            res.status(200).json(result)
+            res.status(200).json({
+                "valasz": "Sikeres lekérdezés!",
+                "adatok": result
+            })
         })
     },
 
@@ -33,9 +35,18 @@ const rentalController = {
         const {kolcsonzes_ideje, hatarido, peldany_id, olvaso_id} = req.body
         Rental.insertRental(kolcsonzes_ideje, hatarido, peldany_id, olvaso_id, (err, result) => {
             if (err) {
-                return res.status(500).json({error: err.message});
+                return next(err)
             }
-            res.status(201).json(result);
+            res.status(201).json({
+                "valasz": "Sikeres létrehozás!",
+                "adatok": {
+                    "id": result.insertId,
+                    "kolcsonzes_ideje": kolcsonzes_ideje,
+                    "hatarido": hatarido,
+                    "peldany_id": peldany_id,
+                    "olvaso_id": olvaso_id
+                }
+            })
         })
     },
 
@@ -43,18 +54,39 @@ const rentalController = {
         const {kolcsonzes_ideje, hatarido, peldany_id, olvaso_id} = req.body
         Rental.updateRental(req.params.id, kolcsonzes_ideje, hatarido, peldany_id, olvaso_id, (err, result) => {
             if (err) {
-                return res.status(500).json({error: err.message});
+                return next(err)
             }
-            res.status(200).json(result)
+            if (result.affectedRows < 1) {
+                return res.status(404).json({
+                    "valasz": "Nincs ilyen kölcsönzés!"
+                })
+            }
+            res.status(200).json({
+                "valasz": "Sikeres módosítás!",
+                "adatok": {
+                    "id": req.params.id,
+                    "kolcsonzes_ideje": kolcsonzes_ideje,
+                    "hatarido": hatarido,
+                    "peldany_id": peldany_id,
+                    "olvaso_id": olvaso_id
+                }
+            })
         })
     },
 
     deleteRental: (req, res, next) => {
         Rental.deleteRental(req.params.id, (err, result) => {
             if (err) {
-                return res.status(500).json({ error: err.message });
+                return next(err)
             }
-            res.status(204).json(result)
+            if (result.affectedRows < 1) {
+                return res.status(404).json({
+                    "valasz": "Nincs ilyen kölcsönzés!"
+                })
+            }
+            res.status(204).json({
+                "valasz": "Sikeres törlés!"
+            })
         })
     }
 }
