@@ -1,6 +1,23 @@
 import { Link } from "react-router";
 
 export function BorrowingList({ borrowings }) {
+    const isExpired = (deadline) => {
+        const currentDate = new Date();
+        const deadlineDate = new Date(deadline)
+        if (deadlineDate < currentDate) {
+            return (
+                <>
+                    {deadline} <strong className="text-danger">Lejárt!</strong>
+                </>
+            )
+        }
+        return (
+            <>
+                {deadline}
+            </>
+        )
+    }
+
     return (
         <table className="table table-striped">
             <thead>
@@ -19,7 +36,7 @@ export function BorrowingList({ borrowings }) {
                         <tr key={item.id}>
                             <td>{item.id}</td>
                             <td>{item.kolcsonzes_ideje}</td>
-                            <td>{item.hatarido}</td>
+                            <td>{isExpired(item.hatarido)}</td>
                             <td>
                                 <Link to={`/peldanyok/${item.peldany_id}`}>{item.peldany_id}</Link>
                             </td>
