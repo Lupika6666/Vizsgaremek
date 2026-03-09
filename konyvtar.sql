@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2026. Feb 14. 21:44
+-- Létrehozás ideje: 2026. Már 09. 12:10
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -21,10 +21,6 @@ SET time_zone = "+00:00";
 -- Adatbázis: `konyvtar`
 --
 
-DROP DATABASE IF EXISTS konyvtar;
-CREATE DATABASE konyvtar CHARACTER SET utf8mb4 COLLATE utf8mb4_hungarian_ci;
-USE konyvtar;
-
 -- --------------------------------------------------------
 
 --
@@ -33,7 +29,7 @@ USE konyvtar;
 
 CREATE TABLE `kolcsonzesek` (
   `id` int(11) NOT NULL,
-  `kolcsonzes_ideje` date NOT NULL,
+  `kolcsonzes_ideje` date NOT NULL DEFAULT current_timestamp(),
   `hatarido` date NOT NULL,
   `peldany_id` int(11) NOT NULL,
   `olvaso_id` int(11) NOT NULL
@@ -49,11 +45,11 @@ CREATE TABLE `konyvek` (
   `id` int(11) NOT NULL,
   `cim` varchar(50) NOT NULL,
   `isbn` varchar(13) NOT NULL,
-  `leiras` text DEFAULT NULL,
-  `publikalas_ev` int(4) DEFAULT NULL,
-  `szerzo_id` int(11) DEFAULT NULL,
-  `nyelv_id` int(11) DEFAULT NULL,
-  `mufaj_id` int(11) DEFAULT NULL
+  `leiras` text DEFAULT '',
+  `publikalas_ev` int(4) DEFAULT 0,
+  `szerzo_id` int(11) DEFAULT 1,
+  `nyelv_id` int(11) DEFAULT 1,
+  `mufaj_id` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
@@ -174,7 +170,6 @@ CREATE TABLE `userek` (
 --
 ALTER TABLE `kolcsonzesek`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`),
   ADD KEY `peldany_id` (`peldany_id`),
   ADD KEY `olvaso_id` (`olvaso_id`);
 
@@ -183,7 +178,6 @@ ALTER TABLE `kolcsonzesek`
 --
 ALTER TABLE `konyvek`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`),
   ADD UNIQUE KEY `isbn` (`isbn`),
   ADD KEY `szerzo_id` (`szerzo_id`),
   ADD KEY `nyelv_id` (`nyelv_id`),
@@ -194,7 +188,6 @@ ALTER TABLE `konyvek`
 --
 ALTER TABLE `mufajok`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`),
   ADD UNIQUE KEY `nev` (`nev`);
 
 --
@@ -202,22 +195,19 @@ ALTER TABLE `mufajok`
 --
 ALTER TABLE `nyelvek`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`),
   ADD UNIQUE KEY `nev` (`nev`);
 
 --
 -- A tábla indexei `olvasok`
 --
 ALTER TABLE `olvasok`
-  ADD PRIMARY KEY (`kartyaszam`),
-  ADD UNIQUE KEY `kartyaszam` (`kartyaszam`);
+  ADD PRIMARY KEY (`kartyaszam`);
 
 --
 -- A tábla indexei `peldanyok`
 --
 ALTER TABLE `peldanyok`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`),
   ADD KEY `konyv_id` (`konyv_id`);
 
 --
@@ -225,7 +215,6 @@ ALTER TABLE `peldanyok`
 --
 ALTER TABLE `szerzok`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`),
   ADD UNIQUE KEY `nev` (`nev`);
 
 --
@@ -233,7 +222,6 @@ ALTER TABLE `szerzok`
 --
 ALTER TABLE `userek`
   ADD PRIMARY KEY (`nev`),
-  ADD UNIQUE KEY `nev` (`nev`),
   ADD KEY `olvaso_id` (`olvaso_id`);
 
 --
@@ -265,12 +253,6 @@ ALTER TABLE `nyelvek`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT a táblához `olvasok`
---
-ALTER TABLE `olvasok`
-  MODIFY `kartyaszam` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT a táblához `peldanyok`
 --
 ALTER TABLE `peldanyok`
@@ -290,28 +272,28 @@ ALTER TABLE `szerzok`
 -- Megkötések a táblához `kolcsonzesek`
 --
 ALTER TABLE `kolcsonzesek`
-  ADD CONSTRAINT `kolcsonzesek_ibfk_1` FOREIGN KEY (`peldany_id`) REFERENCES `peldanyok` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `kolcsonzesek_ibfk_2` FOREIGN KEY (`olvaso_id`) REFERENCES `olvasok` (`kartyaszam`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `kolcsonzesek_ibfk_1` FOREIGN KEY (`peldany_id`) REFERENCES `peldanyok` (`id`),
+  ADD CONSTRAINT `kolcsonzesek_ibfk_2` FOREIGN KEY (`olvaso_id`) REFERENCES `olvasok` (`kartyaszam`);
 
 --
 -- Megkötések a táblához `konyvek`
 --
 ALTER TABLE `konyvek`
-  ADD CONSTRAINT `konyvek_ibfk_1` FOREIGN KEY (`szerzo_id`) REFERENCES `szerzok` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `konyvek_ibfk_2` FOREIGN KEY (`nyelv_id`) REFERENCES `nyelvek` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `konyvek_ibfk_3` FOREIGN KEY (`mufaj_id`) REFERENCES `mufajok` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `konyvek_ibfk_1` FOREIGN KEY (`szerzo_id`) REFERENCES `szerzok` (`id`),
+  ADD CONSTRAINT `konyvek_ibfk_2` FOREIGN KEY (`nyelv_id`) REFERENCES `nyelvek` (`id`),
+  ADD CONSTRAINT `konyvek_ibfk_3` FOREIGN KEY (`mufaj_id`) REFERENCES `mufajok` (`id`);
 
 --
 -- Megkötések a táblához `peldanyok`
 --
 ALTER TABLE `peldanyok`
-  ADD CONSTRAINT `peldanyok_ibfk_1` FOREIGN KEY (`konyv_id`) REFERENCES `konyvek` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `peldanyok_ibfk_1` FOREIGN KEY (`konyv_id`) REFERENCES `konyvek` (`id`);
 
 --
 -- Megkötések a táblához `userek`
 --
 ALTER TABLE `userek`
-  ADD CONSTRAINT `userek_ibfk_1` FOREIGN KEY (`olvaso_id`) REFERENCES `olvasok` (`kartyaszam`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `userek_ibfk_1` FOREIGN KEY (`olvaso_id`) REFERENCES `olvasok` (`kartyaszam`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

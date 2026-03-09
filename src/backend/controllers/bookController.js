@@ -214,6 +214,9 @@ const bookController = {
         const { cim, isbn, publikalas_ev, leiras, nyelv_id, szerzo_id, mufaj_id } = req.body
         Book.insertBook(cim, isbn, publikalas_ev, leiras, nyelv_id, szerzo_id, mufaj_id, (err, result) => {
             if (err) {
+                if (err.code === "ER_DUP_ENTRY") {
+                    return res.status(400).json({ "valasz": "Az ISBN azonosító foglalt!" });
+                }
                 return next(err)
             }
             res.status(201).json({

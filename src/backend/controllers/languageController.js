@@ -96,6 +96,9 @@ const languageController = {
         const { nev } = req.body
         Language.insertLanguage(nev, (err, result) => {
             if (err) {
+                if (err.code === "ER_DUP_ENTRY") {
+                    return res.status(400).json({ "valasz": "A név foglalt!" });
+                }
                 return next(err)
             }
             res.status(201).json({
@@ -160,6 +163,9 @@ const languageController = {
         const { nev } = req.body
         Language.updateLanguage(req.params.id, nev, (err, result) => {
             if (err) {
+                if (err.code === "ER_DUP_ENTRY") {
+                    return res.status(400).json({ "valasz": "A név foglalt!" });
+                }
                 return next(err)
             }
             if (result.affectedRows < 1) {

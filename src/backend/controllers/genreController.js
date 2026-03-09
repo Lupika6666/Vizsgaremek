@@ -85,6 +85,9 @@ const genreController = {
         const { nev } = req.body
         Genre.insertGenre(nev, (err, result) => {
             if (err) {
+                if (err.code === "ER_DUP_ENTRY") {
+                    return res.status(400).json({ "valasz": "A név foglalt!" });
+                }
                 return next(err)
             }
             res.status(201).json({
@@ -149,6 +152,9 @@ const genreController = {
         const { nev } = req.body
         Genre.updateGenre(req.params.id, nev, (err, result) => {
             if (err) {
+                if (err.code === "ER_DUP_ENTRY") {
+                    return res.status(400).json({ "valasz": "A név foglalt!" });
+                }
                 return next(err)
             }
             if (result.affectedRows < 1) {
