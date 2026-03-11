@@ -21,6 +21,11 @@ SET time_zone = "+00:00";
 -- Adatbázis: `konyvtar`
 --
 
+CREATE DATABASE IF NOT EXISTS konyvtar;
+USE konyvtar;
+SELECT DATABASE();
+
+
 -- --------------------------------------------------------
 
 --
@@ -151,13 +156,18 @@ INSERT INTO `szerzok` (`id`, `nev`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `userek`
+-- Tábla szerkezet ehhez a táblához `felhasznalok`
 --
 
-CREATE TABLE `userek` (
+CREATE TABLE `felhasznalok` (
+  `id` int(11) NOT NULL,
   `nev` varchar(25) NOT NULL,
+  `email` VARCHAR(50) NOT NULL UNIQUE,
   `jelszo` varchar(25) NOT NULL,
-  `role` varchar(25) NOT NULL,
+  `szerepkor` ENUM('user', 'admin') DEFAULT 'user',
+  `aktiv` TINYINT(1) DEFAULT(1),
+  `letrehozva` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `legutobbi_bejelentkezes` TIMESTAMP NULL DEFAULT NULL,
   `olvaso_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
@@ -220,8 +230,8 @@ ALTER TABLE `szerzok`
 --
 -- A tábla indexei `userek`
 --
-ALTER TABLE `userek`
-  ADD PRIMARY KEY (`nev`),
+ALTER TABLE `felhasznalok`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `olvaso_id` (`olvaso_id`);
 
 --
@@ -292,7 +302,7 @@ ALTER TABLE `peldanyok`
 --
 -- Megkötések a táblához `userek`
 --
-ALTER TABLE `userek`
+ALTER TABLE `felhasznalok`
   ADD CONSTRAINT `userek_ibfk_1` FOREIGN KEY (`olvaso_id`) REFERENCES `olvasok` (`kartyaszam`);
 COMMIT;
 
