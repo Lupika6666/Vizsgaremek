@@ -36,7 +36,7 @@ app.use('/api/mufajok', genreRoutes)
 app.use('/api/peldanyok', bookCopyRoutes)
 app.use('/api/kolcsonzesek', rentalRoutes)
 app.use('/api/olvasok', readerRoutes)
-app.use('/api/userek', userRoutes)
+app.use('/api/felhasznalok', userRoutes)
 app.use('/api/docs', swaggerRoutes)
 
 //Hibakezelés

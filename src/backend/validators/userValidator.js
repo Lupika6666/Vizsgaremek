@@ -9,8 +9,17 @@ const userRegisterValidator = [
     body('nev').isString().trim().notEmpty().withMessage("A név megadása kötelező!"),
 
     validateRequest
-];
+]
+
+const userLoginValidator = [
+    body('email').isEmail().withMessage("Érvényes email cím megadása kötelező!"),
+
+    body('jelszo').isLength({min: 8}).withMessage("A jelszónak legalább 8 karakter hosszúnak kell lennie!"),
+
+    validateRequest
+]
 
 module.exports = { 
-    userRegisterValidator 
+    userRegisterValidator,
+    userLoginValidator
 }

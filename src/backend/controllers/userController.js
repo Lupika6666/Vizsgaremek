@@ -1,12 +1,55 @@
 const User = require("../models/userModel")
 
 const userController = {
-registerUser: (req, res, next) => {
+    /**
+     * @swagger
+     * tags:
+     *   name: Felhasznalok
+     *   description: Felhasznalok kezelése.
+     */
+
+    /**
+     * @swagger
+     * /api/felhasznalok/regisztracio:
+     *   post:
+     *     summary: Új felhasználó regisztrálása.
+     *     description: Ez a végpont lehetővé teszi új felhasználó létrehozását az adatbázisban.
+     *     tags: ["Felhasznalok"]
+     *     requestBody:
+     *       required: true
+     *       content:
+     *         application/json:
+     *           schema:
+     *             type: object
+     *             properties:
+     *               email:
+     *                 type: string
+     *                 format: email
+     *                 description: "A felhasználó email címe"
+     *               jelszo:
+     *                 type: string
+     *                 description: "A felhasználó jelszava"
+     *               nev:
+     *                 type: string
+     *                 description: "A felhasználó neve"
+     *               olvaso_id:
+     *                 type: integer
+     *                 description: "A felhasználó olvasókártyájának száma"
+     *             required:
+     *               - email
+     *               - jelszo
+     *               - nev
+     *     responses:
+     *       201:
+     *         description: Sikeres létrehozás!
+     *       400:
+     *         description: "Validációs hiba!"
+     *       500:
+     *         description: Belső szerverhiba!
+     */
+    registerUser: (req, res, next) => {
         
-        const email = req.body.email;
-        const jelszo = req.body.jelszo;
-        const nev = req.body.nev;
-        const olvaso_id = req.body.olvaso_id;
+        const {email, jelszo, nev, olvaso_id} = req.body
         
         //jelszó titkosítása
         //TODO
@@ -22,14 +65,64 @@ registerUser: (req, res, next) => {
             }
 
             res.status(201).json({ "valasz": "Sikeres regisztráció!" });
-
         })
-
     },
 
+    /**
+     * @swagger
+     * /api/felhasznalok/bejelentkezes:
+     *   post:
+     *     summary: Felhasználóval bejelentkezés.
+     *     description: Ez a végpont lehetővé teszi a felhasználó bejelentkezését.
+     *     tags: ["Felhasznalok"]
+     *     requestBody:
+     *       required: true
+     *       content:
+     *         application/json:
+     *           schema:
+     *             type: object
+     *             properties:
+     *               email:
+     *                 type: string
+     *                 format: email
+     *                 description: "A felhasználó email címe"
+     *               jelszo:
+     *                 type: string
+     *                 description: "A felhasználó jelszava"
+     *             required:
+     *               - email
+     *               - jelszo
+     *     responses:
+     *       201:
+     *         description: Sikeres létrehozás!
+     *         content:
+     *           application/json:
+     *             schema:
+     *               type: object
+     *               properties:
+     *                 token:
+     *                   type: string
+     *                   description: "Az azonosításhoz szükséges token"
+     *                 felhasznalo:
+     *                   type: object
+     *                   properties:
+     *                     nev:
+     *                       type: string
+     *                       description: "A felhasználó neve"
+     *                     szerepkor:
+     *                       type: string
+     *                       description: "A felhasználó szerepköre"
+     *       400:
+     *         description: "Validációs hiba!"
+     *       401:
+     *         description: Hibás email cím vagy jelszó!
+     *       403:
+     *         description: A fiók deaktiválva van!
+     *       500:
+     *         description: Belső szerverhiba!
+     */
     loginUser: (req, res, next) => {
-        const email = req.body.email;
-        const jelszo = req.body.jelszo;
+        const {email, jelszo} = req.body
 
         User.selectUserByEmail(email, (err, result) => {
             if (err) {
@@ -73,7 +166,6 @@ registerUser: (req, res, next) => {
                     "szerepkor": felhasznalo.szerepkor
                 }
             })
-
         })
     }
 }
