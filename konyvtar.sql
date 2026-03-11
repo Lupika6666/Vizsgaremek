@@ -163,7 +163,7 @@ CREATE TABLE `felhasznalok` (
   `id` int(11) NOT NULL,
   `nev` varchar(25) NOT NULL,
   `email` VARCHAR(50) NOT NULL UNIQUE,
-  `jelszo` varchar(25) NOT NULL,
+  `jelszo` varchar(255) NOT NULL,
   `szerepkor` ENUM('user', 'admin') DEFAULT 'user',
   `aktiv` TINYINT(1) DEFAULT(1),
   `letrehozva` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

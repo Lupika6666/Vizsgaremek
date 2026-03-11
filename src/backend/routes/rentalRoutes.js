@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const Kolcsonzes = require("../models/rentalModel")
 const rentalController = require('../controllers/rentalController')
 const { methodNotAllowed } = require('../utils/error')
 const {rentalGetByIdValidator, rentalPostValidator, rentalPutValidator, rentalDeleteValidator} = require("../validators/rentalValidator");

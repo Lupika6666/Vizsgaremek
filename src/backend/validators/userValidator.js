@@ -8,6 +8,8 @@ const userRegisterValidator = [
 
     body('nev').isString().trim().notEmpty().withMessage("A név megadása kötelező!"),
 
+    body('olvaso_id').isInt({min: 100000, max: 999999}).withMessage("Az olvasókártya megadása kötelező (6 számjegyű szám)"),
+
     validateRequest
 ]
 

@@ -53,13 +53,8 @@ const authorController = {
      *     summary: "Szerző létrehozása."
      *     description: "Ez a végpont lehetővé teszi egy új szerző létrehozását az adatbázisba."
      *     tags: ["Szerzők"]
-     *     parameters:
-     *       - in: path
-     *         name: id
-     *         required: true
-     *         schema:
-     *           type: number
-     *         description: "A szerző egyedi azonosítója"
+     *     security:
+     *       - bearerAuth: []
      *     requestBody:
      *       required: true
      *       content:

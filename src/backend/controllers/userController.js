@@ -1,4 +1,6 @@
+const { hashPassword, comparePassword } = require("../middleware/bcryptHandler");
 const User = require("../models/userModel")
+const jwt = require('jsonwebtoken')
 
 const userController = {
     /**
@@ -39,6 +41,7 @@ const userController = {
      *               - email
      *               - jelszo
      *               - nev
+     *               - olvaso_id
      *     responses:
      *       201:
      *         description: Sikeres létrehozás!
@@ -47,13 +50,13 @@ const userController = {
      *       500:
      *         description: Belső szerverhiba!
      */
-    registerUser: (req, res, next) => {
+    registerUser: async (req, res, next) => {
         
         const {email, jelszo, nev, olvaso_id} = req.body
         
         //jelszó titkosítása
         //TODO
-        const hashedJelszo = jelszo;
+        const hashedJelszo = await hashPassword(jelszo);
 
         User.insertUser(email, hashedJelszo, nev, olvaso_id, (err, result) => {
 
@@ -124,7 +127,7 @@ const userController = {
     loginUser: (req, res, next) => {
         const {email, jelszo} = req.body
 
-        User.selectUserByEmail(email, (err, result) => {
+        User.selectUserByEmail(email, async (err, result) => {
             if (err) {
                 return next(err);
             }
@@ -136,12 +139,12 @@ const userController = {
             const felhasznalo = result[0]
 
             if (felhasznalo.aktiv === 0) {
-                return res.status(403).json({ "valasz": "A fiók deaktiválva van!" });
+                return res.status(403).json({ "valasz": "A fiók deaktiválva van!" })
             }
 
             //helyes jelszó?
             //TODO titkosított jelszó ellenőrzése
-            const jelszoHelyes = (jelszo === felhasznalo.jelszo)
+            const jelszoHelyes = await comparePassword(jelszo, felhasznalo.jelszo)
 
             if (!jelszoHelyes) {
                 return res.status(401).json({ "valasz": "Hibás email cím vagy jelszó!" })

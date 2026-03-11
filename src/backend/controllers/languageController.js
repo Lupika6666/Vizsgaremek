@@ -53,13 +53,6 @@ const languageController = {
      *     summary: "Nyelv létrehozása."
      *     description: "Ez a végpont lehetővé teszi egy új nyelv létrehozását az adatbázisba."
      *     tags: ["Nyelvek"]
-     *     parameters:
-     *       - in: path
-     *         name: id
-     *         required: true
-     *         schema:
-     *           type: number
-     *         description: "A nyelv egyedi azonosítója"
      *     requestBody:
      *       required: true
      *       content:

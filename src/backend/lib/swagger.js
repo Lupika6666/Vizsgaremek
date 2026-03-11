@@ -8,6 +8,15 @@ const options = {
             title: 'E-Könyvtár API',
             version: '1.0.0',
         },
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: "http",
+                    scheme: "bearer",
+                    bearerFormat: "JWT"
+                }
+            }
+        }
     },
     apis: [path.join(__dirname, '../controllers/*.js') ]
 };
