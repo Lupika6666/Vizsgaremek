@@ -5,27 +5,36 @@ import { Author } from "../models/Author";
 export const authorApi = {
     getAll: async () => {
         const response = await api.get("/szerzok");
-        const authors = response.data.map(item => Author.fromApi(item));
+        const authors = response.data.adatok.map(item => Author.fromApi(item));
         return authors;
     },
 
     getById: async (id) => {
         const response = await api.get(`/szerzok/${id}`);
-        const author = Author.fromApi(response.data[0]);
+        const author = Author.fromApi(response.data.adatok[0]);
         return author;
     },
 
-    create: async (authorName) => await api.post("/szerzok",
-        {
-            nev: authorName
-        }
-    ),
+    create: async (authorName) => {
+        const response = await api.post("/szerzok",
+            {
+                nev: authorName
+            }
+        )
+        return response;
+    },
 
-    update: async (id, authorName) => await api.put(`/szerzok/${id}`,
-        {
-            nev: authorName
-        }
-    ),
+    update: async (id, authorName) => {
+        const response = await api.put(`/szerzok/${id}`,
+            {
+                nev: authorName
+            }
+        )
+        return response;
+    },
 
-    delete: async (id) => await api.delete(`/szerzok/${id}`)
+    delete: async (id) => {
+        const response = await api.delete(`/szerzok/${id}`)
+        return response;
+    }
 }
