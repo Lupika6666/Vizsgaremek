@@ -4,29 +4,38 @@ import { BookCopy } from "../models/BookCopy";
 export const bookCopyApi = {
     getAll: async () => {
         const response = await api.get("/peldanyok");
-        const copies = response.data.map(item => BookCopy.fromApi(item));
+        const copies = response.data.adatok.map(item => BookCopy.fromApi(item));
         return copies;
     },
 
     getById: async (id) => {
         const response = await api.get(`/peldanyok/${id}`);
-        const copy = BookCopy.fromApi(response.data[0]);
+        const copy = BookCopy.fromApi(response.data.adatok[0]);
         return copy;
     },
 
-    create: async (data) => await api.post("/peldanyok",
-        {
-            hely: data.hely,
-            konyv_id: data.konyv_id
-        }
-    ),
+    create: async (data) => {
+        const response = await api.post("/peldanyok",
+            {
+                hely: data.hely,
+                konyv_id: data.konyv_id
+            }
+        )
+        return response;
+    },
 
-    update: async (id, data) => await api.put(`/peldanyok/${id}`,
-        {
-            hely: data.hely,
-            konyv_id: data.konyv_id
-        }
-    ),
+    update: async (id, data) => {
+        const response = await api.put(`/peldanyok/${id}`,
+            {
+                hely: data.hely,
+                konyv_id: data.konyv_id
+            }
+        )
+        return response;
+    },
 
-    delete: async (id) => await api.delete(`/peldanyok/${id}`)
+    delete: async (id) => {
+        const response = await api.delete(`/peldanyok/${id}`)
+        return response;
+    }
 }

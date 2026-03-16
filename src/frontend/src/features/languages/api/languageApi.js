@@ -5,27 +5,36 @@ import { Language } from "../models/Language";
 export const languageApi = {
     getAll: async () => {
         const response = await api.get("/nyelvek");
-        const languages = response.data.map(item => Language.fromApi(item));
+        const languages = response.data.adatok.map(item => Language.fromApi(item));
         return languages;
     },
 
     getById: async (id) => {
         const response = await api.get(`/nyelvek/${id}`);
-        const language = Language.fromApi(response.data[0]);
+        const language = Language.fromApi(response.data.adatok[0]);
         return language;
     },
 
-    create: async (languageName) => await api.post("/nyelvek",
-        {
-            nev: languageName
-        }
-    ),
+    create: async (languageName) => {
+        const response = await api.post("/nyelvek",
+            {
+                nev: languageName
+            }
+        )
+        return response;
+    },
 
-    update: async (id, languageName) => await api.put(`/nyelvek/${id}`,
-        {
-            nev: languageName
-        }
-    ),
+    update: async (id, languageName) => {
+        const response = await api.put(`/nyelvek/${id}`,
+            {
+                nev: languageName
+            }
+        )
+        return response;
+    },
 
-    delete: async (id) => await api.delete(`/nyelvek/${id}`)
+    delete: async (id) => {
+        const response = await api.delete(`/nyelvek/${id}`)
+        return response;
+    }
 }

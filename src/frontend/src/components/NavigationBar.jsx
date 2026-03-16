@@ -1,6 +1,17 @@
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
+import { useUser } from "../features/user/stores/userProvider";
+import { toast } from "sonner";
 
 export function NavigationBar() {
+    const { role, logout } = useUser();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate("/login");
+        toast.info("Sikeres kijelentkezés");
+    }
+
     return (
         <div>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -40,6 +51,12 @@ export function NavigationBar() {
                             
 
                         </ul>
+
+                        {role && (
+                            <button type="button" className="btn btn-outline-danger btn-sm" onClick={handleLogout}>
+                                Kijelentkezés
+                            </button>
+                        )}
                     </div>
                 </div>
             </nav>
