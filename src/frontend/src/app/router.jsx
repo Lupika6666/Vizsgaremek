@@ -34,184 +34,202 @@ import { DeleteReaderPage } from "./pages/readers/DeleteReaderPage";
 import { AddBorrowingPage } from "./pages/borrowings/AddBorrowingPage";
 import { EditBorrowingPage } from "./pages/borrowings/EditBorrowingPage";
 import { DeleteBorrowingPage } from "./pages/borrowings/DeleteBorrowingPage";
+import { LoginPage } from "./pages/user/LoginPage";
+import { RegisterPage } from "./pages/user/RegisterPage";
+import { ProtectedRoute } from "../components/ProtectedRoute";
 
 export const router = createBrowserRouter(
     [
         {
-            path: "/",
-            element: <MainLayout />,
+            path: "login",
+            element: <LoginPage />
+        },
+
+        {
+            path: "regisztracio",
+            element: <RegisterPage />
+        },
+
+        {
+            element: <ProtectedRoute />,
             children: [
                 {
-                    index: true,
-                    element: <HomePage />
-                },
-
-                {
-                    path: "konyvek",
+                    path: "/",
+                    element: <MainLayout />,
                     children: [
                         {
                             index: true,
-                            element: <BookListPage />
+                            element: <HomePage />
                         },
 
                         {
-                            path: ":id",
-                            element: <BookDetailsPage />
+                            path: "konyvek",
+                            children: [
+                                {
+                                    index: true,
+                                    element: <BookListPage />
+                                },
+
+                                {
+                                    path: ":id",
+                                    element: <BookDetailsPage />
+                                },
+
+                                {
+                                    path: "uj",
+                                    element: <AddBookPage />
+                                },
+
+                                {
+                                    path: "szerkesztes/:id",
+                                    element: <EditBookPage />
+                                },
+
+                                {
+                                    path: "torles/:id",
+                                    element: <DeleteBookPage />
+                                }
+                            ]
                         },
 
                         {
-                            path: "uj",
-                            element: <AddBookPage />
+                            path: "nyelvek",
+                            children: [
+                                {
+                                    index: true,
+                                    element: <LanguageListPage />
+                                },
+
+                                {
+                                    path: "szerkesztes/:id",
+                                    element: <EditLanguagePage />
+                                },
+
+                                {
+                                    path: "torles/:id",
+                                    element: <DeleteLanguagePage />
+                                }
+                            ]
                         },
 
                         {
-                            path: "szerkesztes/:id",
-                            element: <EditBookPage />
+                            path: "szerzok",
+                            children: [
+                                {
+                                    index: true,
+                                    element: <AuthorListPage />
+                                },
+
+                                {
+                                    path: "szerkesztes/:id",
+                                    element: <EditAuthorPage />
+                                },
+
+                                {
+                                    path: "torles/:id",
+                                    element: <DeleteAuthorPage />
+                                }
+                            ]
                         },
 
                         {
-                            path: "torles/:id",
-                            element: <DeleteBookPage />
-                        }
-                    ]
-                },
+                            path: "mufajok",
+                            children: [
+                                {
+                                    index: true,
+                                    element: <GenreListPage />
+                                },
 
-                {
-                    path: "nyelvek",
-                    children: [
-                        {
-                            index: true,
-                            element: <LanguageListPage/>
+                                {
+                                    path: "szerkesztes/:id",
+                                    element: <EditGenrePage />
+                                },
+
+                                {
+                                    path: "torles/:id",
+                                    element: <DeleteGenrePage />
+                                }
+                            ]
                         },
 
                         {
-                            path: "szerkesztes/:id",
-                            element: <EditLanguagePage/>
+                            path: "peldanyok",
+                            children: [
+                                {
+                                    index: true,
+                                    element: <BookCopyListPage />
+                                },
+
+                                {
+                                    path: ":id",
+                                    element: <BookCopyDetailsPage />
+                                },
+
+                                {
+                                    path: "szerkesztes/:id",
+                                    element: <EditBookCopyPage />
+                                },
+
+                                {
+                                    path: "torles/:id",
+                                    element: <DeleteBookCopyPage />
+                                }
+                            ]
                         },
 
                         {
-                            path: "torles/:id",
-                            element: <DeleteLanguagePage/>
-                        }
-                    ]
-                },
+                            path: "kolcsonzesek",
+                            children: [
+                                {
+                                    index: true,
+                                    element: <BorrowingListPage />
+                                },
 
-                {
-                    path: "szerzok",
-                    children: [
-                        {
-                            index: true,
-                            element: <AuthorListPage/>
+                                {
+                                    path: "uj",
+                                    element: <AddBorrowingPage />
+                                },
+
+                                {
+                                    path: "szerkesztes/:id",
+                                    element: <EditBorrowingPage />
+                                },
+
+                                {
+                                    path: "torles/:id",
+                                    element: <DeleteBorrowingPage />
+                                }
+                            ]
                         },
 
                         {
-                            path: "szerkesztes/:id",
-                            element: <EditAuthorPage/>
-                        },
+                            path: "olvasok",
+                            children: [
+                                {
+                                    index: true,
+                                    element: <ReaderListPage />
+                                },
 
-                        {
-                            path: "torles/:id",
-                            element: <DeleteAuthorPage/>
-                        }
-                    ]
-                },
+                                {
+                                    path: ":id",
+                                    element: <ReaderDetailsPage />
+                                },
 
-                {
-                    path: "mufajok",
-                    children: [
-                        {
-                            index: true,
-                            element: <GenreListPage/>
-                        },
+                                {
+                                    path: "uj",
+                                    element: <AddReaderPage />
+                                },
 
-                        {
-                            path: "szerkesztes/:id",
-                            element: <EditGenrePage/>
-                        },
+                                {
+                                    path: "szerkesztes/:id",
+                                    element: <EditReaderPage />
+                                },
 
-                        {
-                            path: "torles/:id",
-                            element: <DeleteGenrePage/>
-                        }
-                    ]
-                },
-
-                {
-                    path: "peldanyok",
-                    children: [
-                        {
-                            index: true,
-                            element: <BookCopyListPage/>
-                        },
-
-                        {
-                            path: ":id",
-                            element: <BookCopyDetailsPage/>
-                        },
-
-                        {
-                            path: "szerkesztes/:id",
-                            element: <EditBookCopyPage/>
-                        },
-
-                        {
-                            path: "torles/:id",
-                            element: <DeleteBookCopyPage/>
-                        }
-                    ]
-                },
-
-                {
-                    path: "kolcsonzesek",
-                    children: [
-                        {
-                            index: true,
-                            element: <BorrowingListPage />
-                        },
-
-                        {
-                            path: "uj",
-                            element: <AddBorrowingPage/>
-                        },
-
-                        {
-                            path: "szerkesztes/:id",
-                            element: <EditBorrowingPage/>
-                        },
-
-                        {
-                            path: "torles/:id",
-                            element: <DeleteBorrowingPage/>
-                        }
-                    ]
-                },
-
-                {
-                    path: "olvasok",
-                    children: [
-                        {
-                            index: true,
-                            element: <ReaderListPage/>
-                        },
-
-                        {
-                            path: ":id",
-                            element: <ReaderDetailsPage/>
-                        },
-
-                        {
-                            path: "uj",
-                            element: <AddReaderPage/>
-                        },
-
-                        {
-                            path: "szerkesztes/:id",
-                            element: <EditReaderPage/>
-                        },
-
-                        {
-                            path: "torles/:id",
-                            element: <DeleteReaderPage/>
+                                {
+                                    path: "torles/:id",
+                                    element: <DeleteReaderPage />
+                                }
+                            ]
                         }
                     ]
                 }
