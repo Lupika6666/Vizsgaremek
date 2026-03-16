@@ -4,8 +4,10 @@ import { useBooks } from "../../../features/books/stores/bookProvider";
 import { useLanguages } from "../../../features/languages/stores/languageProvider";
 import { useAuthors } from "../../../features/authors/stores/authorProvider";
 import { useGenres } from "../../../features/genres/stores/genreProvider";
+import { useUser } from "../../../features/user/stores/userProvider";
 
 export function BookListPage() {
+    const { role } = useUser();
 
     const { books, selectedBook, isLoading: isLoadingBooks, getBooks, getBookById, createBook, updateBook, deleteBook } = useBooks();
     const { languages, selectedLanguage, isLoading: isLoadingLanguages, getLanguages, getLanguageById, createLanguage, updateLanguage, deleteLanguage } = useLanguages();
@@ -15,7 +17,7 @@ export function BookListPage() {
     return (
         <div>
             <BookList books={books} />
-            <Link className="btn btn-primary" to="/konyvek/uj">Új könyv felvétele</Link>
+            {role === "admin" && (<Link className="btn btn-primary" to="/konyvek/uj">Új könyv felvétele</Link>)}
         </div>
     )
 }

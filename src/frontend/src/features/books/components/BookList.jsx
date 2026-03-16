@@ -115,7 +115,6 @@ export function BookList({ books }) {
                                 <td>{item.mufaj_id}</td>
                                 <td>
                                     <Link className="btn btn-primary" to={`/konyvek/${item.id}`}>Adatlap</Link>
-                                    <Link className="btn btn-danger" to={`/konyvek/torles/${item.id}`}>Törlés</Link>
                                 </td>
                             </tr>
                         )

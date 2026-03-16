@@ -1,15 +1,18 @@
 import { Link } from "react-router";
+import { useUser } from "../../user/stores/userProvider";
 
 export function BookCopyDetails({ bookCopy, books }) {
+    const { role } = useUser();
+
     return (
         <div>
             <ol className="list-group list-group-numbered">
-                <li className="list-group-item d-flex justify-content-between align-items-start">
+                {role === "admin" && (<li className="list-group-item d-flex justify-content-between align-items-start">
                     <div className="ms-2 me-auto">
                         <div className="fw-bold">ID</div>
                         {bookCopy.id}
                     </div>
-                </li>
+                </li>)}
                 <li className="list-group-item d-flex justify-content-between align-items-start">
                     <div className="ms-2 me-auto">
                         <div className="fw-bold">Hely</div>
@@ -19,7 +22,7 @@ export function BookCopyDetails({ bookCopy, books }) {
                 <li className="list-group-item d-flex justify-content-between align-items-start">
                     <div className="ms-2 me-auto">
                         <div className="fw-bold">Könyv</div>
-                        {books.find(item=>item.id==bookCopy.konyv_id).cim}
+                        {books.find(item => item.id == bookCopy.konyv_id).cim}
                         <Link className="btn btn-primary" to={`/konyvek/${bookCopy.konyv_id}`}>Adatlap</Link>
                     </div>
                 </li>

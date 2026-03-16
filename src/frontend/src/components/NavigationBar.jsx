@@ -27,7 +27,7 @@ export function NavigationBar() {
                                 <NavLink className="nav-link" to="/">Főoldal</NavLink>
                             </li>
 
-                            <li className="nav-item dropdown">
+                            {role === "admin" && (<li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle" to="/konyvek" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Könyvek
                                 </Link>
@@ -38,17 +38,19 @@ export function NavigationBar() {
                                     <li><Link className="dropdown-item" to="/szerzok">Szerzők</Link></li>
                                     <li><Link className="dropdown-item" to="/mufajok">Műfajok</Link></li>
                                 </ul>
-                            </li>
+                            </li>)}
+
+                            {role === "user" && (<li className="nav-item">
+                                <NavLink className="nav-link" to="/konyvek">Könyvek</NavLink>
+                            </li>)}
 
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/kolcsonzesek">Kölcsönzések</NavLink>
                             </li>
 
-                            <li className="nav-item">
+                            {role === "admin" && (<li className="nav-item">
                                 <NavLink className="nav-link" to="/olvasok">Olvasók</NavLink>
-                            </li>
-
-                            
+                            </li>)}
 
                         </ul>
 
