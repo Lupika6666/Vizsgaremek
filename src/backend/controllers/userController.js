@@ -154,6 +154,7 @@ const userController = {
                 {
                     "id": felhasznalo.id,
                     "szerepkor": felhasznalo.szerepkor,
+                    "olvaso_id": felhasznalo.olvaso_id
                 },
                 process.env.JWT_TOKEN_KEY,
                 {
@@ -166,7 +167,8 @@ const userController = {
                 "token": token,
                 "felhasznalo": {
                     "nev": felhasznalo.nev,
-                    "szerepkor": felhasznalo.szerepkor
+                    "szerepkor": felhasznalo.szerepkor,
+                    "olvaso_id": felhasznalo.olvaso_id
                 }
             })
         })
