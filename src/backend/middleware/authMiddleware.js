@@ -16,7 +16,7 @@ const authMiddleware = {
         }
 
         try{
-            const dekodoltToken = jwt.verify(token, process.env.JWT_TOKEN_KEY)
+            const dekodoltToken = jwt.verify(token, process.env.ACCESS_TOKEN_KEY)
             req.felhasznalo = dekodoltToken
             next()
         } catch (err) {

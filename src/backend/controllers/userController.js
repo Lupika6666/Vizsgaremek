@@ -150,21 +150,34 @@ const userController = {
                 return res.status(401).json({ "valasz": "Hibás email cím vagy jelszó!" })
             }
 
-            const token = jwt.sign(
+            const accessToken = jwt.sign(
                 {
                     "id": felhasznalo.id,
                     "szerepkor": felhasznalo.szerepkor,
                     "olvaso_id": felhasznalo.olvaso_id
                 },
-                process.env.JWT_TOKEN_KEY,
+                process.env.ACCESS_TOKEN_KEY,
                 {
-                    expiresIn: '1h'
+                    expiresIn: 900
                 }
-            );
+            )
+
+            const refreshToken = jwt.sign(
+                {
+                    "id": felhasznalo.id,
+                    "szerepkor": felhasznalo.szerepkor,
+                    "olvaso_id": felhasznalo.olvaso_id
+                },
+                process.env.REFRESH_TOKEN_KEY,
+                {
+                    expiresIn: "1d"
+                }
+            )
 
             res.status(200).json({
                 "valasz": "Sikeres bejelentkezés",
-                "token": token,
+                "accessToken": accessToken,
+                "refreshToken": refreshToken,
                 "felhasznalo": {
                     "nev": felhasznalo.nev,
                     "szerepkor": felhasznalo.szerepkor,
