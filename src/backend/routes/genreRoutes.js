@@ -9,5 +9,6 @@ router.post('/', genrePostValidator, genreController.postGenre)
 router.put('/:id', genrePutValidator, genreController.putGenre)
 router.delete('/:id', genreDeleteValidator, genreController.deleteGenre)
 router.all('/', methodNotAllowed)
+router.all('/:id', methodNotAllowed)
 
 module.exports = router

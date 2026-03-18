@@ -10,5 +10,6 @@ router.post('/', bookCopyPostValidator, bookCopyController.postBookCopy)
 router.put('/:id', bookCopyPutValidator, bookCopyController.putBookCopy)
 router.delete('/:id', bookCopyDeleteValidator, bookCopyController.deleteBookCopy)
 router.all('/', methodNotAllowed)
+router.all('/:id', methodNotAllowed)
 
 module.exports = router

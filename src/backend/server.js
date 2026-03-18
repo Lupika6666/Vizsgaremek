@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const corsMiddleware = require('./middleware/cors')
 const logger = require('./config/logger')
 const { notFoundHandler, errorHandler } = require('./middleware/errorHandler')
+const cookieParser = require('cookie-parser')
 
 //Route importok hely
 const bookRoutes = require('./routes/bookRoutes')
@@ -22,6 +23,8 @@ const port = process.env.PORT || 3000
 //Middlewarek helye
 app.use(express.json())
 app.use(corsMiddleware)
+
+app.use(cookieParser())
 
 //HTTP kérés loggolás
 app.use(morgan(':method :url :status :response-time ms', {

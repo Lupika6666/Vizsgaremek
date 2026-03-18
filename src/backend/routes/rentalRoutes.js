@@ -10,5 +10,6 @@ router.post('/', rentalPostValidator, rentalController.postRental)
 router.put ('/:id', rentalPutValidator, rentalController.putRental)
 router.delete('/:id', rentalDeleteValidator, rentalController.deleteRental)
 router.all('/', methodNotAllowed)
+router.all('/:id', methodNotAllowed)
 
 module.exports = router

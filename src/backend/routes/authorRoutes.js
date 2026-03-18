@@ -10,5 +10,6 @@ router.post('/', authMiddleware.varifyToken, authMiddleware.requireRole(["admin"
 router.put('/:id', authorPutValidator, authorController.putAuthor)
 router.delete('/:id', authorDeleteValidator, authorController.deleteAuthor)
 router.all('/', methodNotAllowed )
+router.all('/:id', methodNotAllowed )
 
 module.exports = router

@@ -6,9 +6,11 @@ const { userRegisterValidator, userLoginValidator } = require('../validators/use
 
 router.post('/regisztracio', userRegisterValidator, userController.registerUser)
 router.post('/bejelentkezes', userLoginValidator, userController.loginUser)
-
-//hibás HTTP metódus megadása esetén 405 státusz küldése
+router.post("/token-frissites", userController.refreshToken)
+router.post("/kijelentkezes", userController.logoutUser)
 router.all('/regisztracio', methodNotAllowed)
 router.all('/bejelentkezes', methodNotAllowed)
+router.all('/token-frissites', methodNotAllowed)
+router.all('/kijelentkezes', methodNotAllowed)
 
 module.exports = router
