@@ -20,8 +20,8 @@ const authMiddleware = {
             req.felhasznalo = dekodoltToken
             next()
         } catch (err) {
-            return res.status(403).json({
-                "valasz": "Nincs jogosultságod!"
+            return res.status(401).json({
+                "valasz": "Hozzáférés megtagadva!"
             })
         }
     },
