@@ -10,5 +10,6 @@ router.post('/', bookPostValidator, bookController.postBook)
 router.put('/:id', bookPutValidator, bookController.putBook)
 router.delete('/:id', bookDeleteValidator, bookController.deleteBook)
 router.all('/', methodNotAllowed)
+router.all('/:id', methodNotAllowed)
 
 module.exports = router

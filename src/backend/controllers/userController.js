@@ -51,9 +51,9 @@ const userController = {
      *         description: Belső szerverhiba!
      */
     registerUser: async (req, res, next) => {
-        
-        const {email, jelszo, nev, olvaso_id} = req.body
-        
+
+        const { email, jelszo, nev, olvaso_id } = req.body
+
         const hashedJelszo = await hashPassword(jelszo);
 
         User.insertUser(email, hashedJelszo, nev, olvaso_id, (err, result) => {
@@ -132,7 +132,7 @@ const userController = {
      *         description: Belső szerverhiba!
      */
     loginUser: (req, res, next) => {
-        const {email, jelszo} = req.body
+        const { email, jelszo } = req.body
 
         User.selectUserByEmail(email, async (err, result) => {
             if (err) {
@@ -204,10 +204,11 @@ const userController = {
         })
     },
 
+    //TODO swagger
     refreshToken: (req, res, next) => {
         const { refreshToken } = req.cookies
 
-        if(!refreshToken) {
+        if (!refreshToken) {
             return res.status(401).json({
                 "valasz": "Nincs refresh token! Új access token nem generálható!"
             })
@@ -215,7 +216,7 @@ const userController = {
 
         try {
             const decodedRefreshToken = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_KEY)
-            
+
             const accessToken = jwt.sign(
                 {
                     "id": decodedRefreshToken.id,
@@ -238,6 +239,19 @@ const userController = {
                 "valasz": "Érvénytelen vagy lejárt refresh token!"
             })
         }
+    },
+
+    //TODO swagger
+    logoutUser: (req, res, next) => {
+        res.clearCookie("refreshToken", {
+            httpOnly: false,
+            secure: false,
+            sameSite: true
+        })
+
+        res.status(200).json({
+            "valasz": "Sikeres kijelentkezés"
+        })
     }
 }
 

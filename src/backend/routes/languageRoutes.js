@@ -9,5 +9,6 @@ router.post('/', languagePostValidator, languageController.postLanguage)
 router.put('/:id', languagePutValidator, languageController.putLanguage)
 router.delete('/:id', languageDeleteValidator, languageController.deleteLanguage)
 router.all('/', methodNotAllowed)
+router.all('/:id', methodNotAllowed)
 
 module.exports = router

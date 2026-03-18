@@ -10,5 +10,6 @@ router.post('/', readerPostValidator, readerController.postReader)
 router.put('/:id', readerPutValidator, readerController.putReader)
 router.delete('/:id', readerDeleteValidator, readerController.deleteReader)
 router.all('/', methodNotAllowed)
+router.all('/:id', methodNotAllowed)
 
 module.exports = router
