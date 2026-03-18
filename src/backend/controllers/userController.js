@@ -54,8 +54,6 @@ const userController = {
         
         const {email, jelszo, nev, olvaso_id} = req.body
         
-        //jelszó titkosítása
-        //TODO
         const hashedJelszo = await hashPassword(jelszo);
 
         User.insertUser(email, hashedJelszo, nev, olvaso_id, (err, result) => {
@@ -109,12 +107,21 @@ const userController = {
      *                 felhasznalo:
      *                   type: object
      *                   properties:
+     *                     id:
+     *                       type: integer
+     *                       description: "A felhasználó azonosítója"
+     *                     email:
+     *                       type: string
+     *                       description: "A felhasználó email címe"
      *                     nev:
      *                       type: string
      *                       description: "A felhasználó neve"
      *                     szerepkor:
      *                       type: string
      *                       description: "A felhasználó szerepköre"
+     *                     olvaso_id:
+     *                       type: integer
+     *                       description: "A felhasználó olvasói kártyaszáma"
      *       400:
      *         description: "Validációs hiba!"
      *       401:
@@ -142,8 +149,6 @@ const userController = {
                 return res.status(403).json({ "valasz": "A fiók deaktiválva van!" })
             }
 
-            //helyes jelszó?
-            //TODO titkosított jelszó ellenőrzése
             const jelszoHelyes = await comparePassword(jelszo, felhasznalo.jelszo)
 
             if (!jelszoHelyes) {
@@ -153,6 +158,8 @@ const userController = {
             const accessToken = jwt.sign(
                 {
                     "id": felhasznalo.id,
+                    "email": felhasznalo.email,
+                    "nev": felhasznalo.nev,
                     "szerepkor": felhasznalo.szerepkor,
                     "olvaso_id": felhasznalo.olvaso_id
                 },
@@ -165,6 +172,8 @@ const userController = {
             const refreshToken = jwt.sign(
                 {
                     "id": felhasznalo.id,
+                    "email": felhasznalo.email,
+                    "nev": felhasznalo.nev,
                     "szerepkor": felhasznalo.szerepkor,
                     "olvaso_id": felhasznalo.olvaso_id
                 },
@@ -174,17 +183,61 @@ const userController = {
                 }
             )
 
+            res.cookie('refreshToken', refreshToken, {
+                httpOnly: false,
+                secure: false,
+                sameSite: true,
+                maxAge: 1 * 24 * 60 * 60 * 1000
+            })
+
             res.status(200).json({
                 "valasz": "Sikeres bejelentkezés",
                 "accessToken": accessToken,
-                "refreshToken": refreshToken,
                 "felhasznalo": {
+                    "id": felhasznalo.id,
+                    "email": felhasznalo.email,
                     "nev": felhasznalo.nev,
                     "szerepkor": felhasznalo.szerepkor,
                     "olvaso_id": felhasznalo.olvaso_id
                 }
             })
         })
+    },
+
+    refreshToken: (req, res, next) => {
+        const { refreshToken } = req.cookies
+
+        if(!refreshToken) {
+            return res.status(401).json({
+                "valasz": "Nincs refresh token! Új access token nem generálható!"
+            })
+        }
+
+        try {
+            const decodedRefreshToken = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_KEY)
+            
+            const accessToken = jwt.sign(
+                {
+                    "id": decodedRefreshToken.id,
+                    "email": decodedRefreshToken.email,
+                    "nev": decodedRefreshToken.nev,
+                    "szerepkor": decodedRefreshToken.szerepkor,
+                    "olvaso_id": decodedRefreshToken.olvaso_id
+                },
+                process.env.ACCESS_TOKEN_KEY,
+                {
+                    expiresIn: 900
+                }
+            )
+
+            res.status(200).json({
+                "accessToken": accessToken
+            })
+        } catch (error) {
+            return res.status(403).json({
+                "valasz": "Érvénytelen vagy lejárt refresh token!"
+            })
+        }
     }
 }
 
