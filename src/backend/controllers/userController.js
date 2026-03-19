@@ -94,8 +94,8 @@ const userController = {
      *               - email
      *               - jelszo
      *     responses:
-     *       201:
-     *         description: Sikeres létrehozás!
+     *       200:
+     *         description: Sikeres bejelentkezés
      *         content:
      *           application/json:
      *             schema:
