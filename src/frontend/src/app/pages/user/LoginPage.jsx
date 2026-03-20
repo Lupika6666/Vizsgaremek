@@ -15,7 +15,7 @@ export function LoginPage(){
             //1. kérés indítása
             const data = await userApi.login(email, password);
 
-            login(data.token);
+            login(data.accessToken);
             
             const successMessage = data.valasz ? data.valasz : "Sikeres bejelentkezés";
             toast.success(successMessage);
