@@ -275,6 +275,12 @@ ALTER TABLE `szerzok`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT a táblához `szerzok`
+--
+ALTER TABLE `felhasznalok`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Megkötések a kiírt táblákhoz
 --
 
