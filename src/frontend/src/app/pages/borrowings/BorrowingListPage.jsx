@@ -7,18 +7,18 @@ import { useBooks } from "../../../features/books/stores/bookProvider";
 import { useUser } from "../../../features/user/stores/userProvider";
 
 export function BorrowingListPage() {
-    const { role, readerId } = useUser();
+    const { user } = useUser();
     const [searchParams] = useSearchParams();
 
     const { borrowings, selectedBorrowing, isLoading: isLoadingBorrowings, getBorrowings, getBorrowingById, createBorrowing, updateBorrowing, deleteBorrowing } = useBorrowings();
     const { readers, selectedReader, isLoading: isLoadingReaders, getReaders, getReaderById, createReader, updateReader, deleteReader } = useReaders();
     const { bookCopies, selectedBookCopy, isLoading: isLoadingBookCopies, getBookCopies, getBookCopyById, createBookCopy, updateBookCopy, deleteBookCopy } = useBookCopies();
 
-    if(role === "user"){
-        const borrowingsByCurrentUser = borrowings.filter(item => item.olvaso_id == readerId);
+    if(!user.isAdmin()){
+        const borrowingsByCurrentUser = borrowings.filter(item => item.olvaso_id == user.olvaso_id);
         return(
             <div>
-                <BorrowingList borrowings={borrowingsByCurrentUser} role={role} />
+                <BorrowingList borrowings={borrowingsByCurrentUser} role={user.szerepkor} />
             </div>
         )
     }
@@ -28,7 +28,7 @@ export function BorrowingListPage() {
         const borrowingsByBookCopy = borrowings.filter(item => item.peldany_id == bookCopyId);
         return (
             <div>
-                <BorrowingList borrowings={borrowingsByBookCopy} role={role} />
+                <BorrowingList borrowings={borrowingsByBookCopy} role={user.szerepkor} />
             </div>
         )
     }
@@ -38,16 +38,16 @@ export function BorrowingListPage() {
         const borrowingsByReader = borrowings.filter(item => item.olvaso_id == readerIdFromParam);
         return (
             <div>
-                <BorrowingList borrowings={borrowingsByReader} role={role} />
-                {role === "admin" && (<Link className="btn btn-primary" to={`/kolcsonzesek/uj?kartyaszam=${readerIdFromParam}`}>Új kölcsönzés felvétele</Link>)}
+                <BorrowingList borrowings={borrowingsByReader} role={user.szerepkor} />
+                {user.isAdmin() && (<Link className="btn btn-primary" to={`/kolcsonzesek/uj?kartyaszam=${readerIdFromParam}`}>Új kölcsönzés felvétele</Link>)}
             </div>
         )
     }
 
     return (
         <div>
-            <BorrowingList borrowings={borrowings} role={role} />
-            {role === "admin" && (<Link className="btn btn-primary" to="/kolcsonzesek/uj">Új kölcsönzés felvétele</Link>)}
+            <BorrowingList borrowings={borrowings} role={user.szerepkor} />
+            {user.isAdmin() && (<Link className="btn btn-primary" to="/kolcsonzesek/uj">Új kölcsönzés felvétele</Link>)}
         </div>
     )
 }

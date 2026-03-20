@@ -7,7 +7,7 @@ import { useGenres } from "../../../features/genres/stores/genreProvider";
 import { useUser } from "../../../features/user/stores/userProvider";
 
 export function BookListPage() {
-    const { role } = useUser();
+    const { user } = useUser();
 
     const { books, selectedBook, isLoading: isLoadingBooks, getBooks, getBookById, createBook, updateBook, deleteBook } = useBooks();
     const { languages, selectedLanguage, isLoading: isLoadingLanguages, getLanguages, getLanguageById, createLanguage, updateLanguage, deleteLanguage } = useLanguages();
@@ -17,7 +17,7 @@ export function BookListPage() {
     return (
         <div>
             <BookList books={books} />
-            {role === "admin" && (<Link className="btn btn-primary" to="/konyvek/uj">Új könyv felvétele</Link>)}
+            {user.isAdmin() && (<Link className="btn btn-primary" to="/konyvek/uj">Új könyv felvétele</Link>)}
         </div>
     )
 }

@@ -3,7 +3,7 @@ import { useUser } from "../features/user/stores/userProvider";
 import { toast } from "sonner";
 
 export function NavigationBar() {
-    const { role, logout } = useUser();
+    const { user, logout } = useUser();
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -27,7 +27,7 @@ export function NavigationBar() {
                                 <NavLink className="nav-link" to="/">Főoldal</NavLink>
                             </li>
 
-                            {role === "admin" && (<li className="nav-item dropdown">
+                            {user.isAdmin() && (<li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle" to="/konyvek" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Könyvek
                                 </Link>
@@ -40,7 +40,7 @@ export function NavigationBar() {
                                 </ul>
                             </li>)}
 
-                            {role === "user" && (<li className="nav-item">
+                            {!user.isAdmin() && (<li className="nav-item">
                                 <NavLink className="nav-link" to="/konyvek">Könyvek</NavLink>
                             </li>)}
 
@@ -48,13 +48,13 @@ export function NavigationBar() {
                                 <NavLink className="nav-link" to="/kolcsonzesek">Kölcsönzések</NavLink>
                             </li>
 
-                            {role === "admin" && (<li className="nav-item">
+                            {user.isAdmin() && (<li className="nav-item">
                                 <NavLink className="nav-link" to="/olvasok">Olvasók</NavLink>
                             </li>)}
 
                         </ul>
 
-                        {role && (
+                        {user && (
                             <button type="button" className="btn btn-outline-danger btn-sm" onClick={handleLogout}>
                                 Kijelentkezés
                             </button>

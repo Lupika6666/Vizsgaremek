@@ -2,12 +2,12 @@ import { Link } from "react-router";
 import { useUser } from "../../user/stores/userProvider";
 
 export function BookCopyDetails({ bookCopy, books }) {
-    const { role } = useUser();
+    const { user } = useUser();
 
     return (
         <div>
             <ol className="list-group list-group-numbered">
-                {role === "admin" && (<li className="list-group-item d-flex justify-content-between align-items-start">
+                {user.isAdmin() && (<li className="list-group-item d-flex justify-content-between align-items-start">
                     <div className="ms-2 me-auto">
                         <div className="fw-bold">ID</div>
                         {bookCopy.id}
