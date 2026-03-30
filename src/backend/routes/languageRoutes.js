@@ -3,11 +3,12 @@ const router = express.Router()
 const languageController = require('../controllers/languageController')
 const { methodNotAllowed } = require('../utils/error')
 const {languagePostValidator, languagePutValidator, languageDeleteValidator} = require("../validators/languageValidator")
+const authMiddleware = require("../middleware/authMiddleware");
 
 router.get('/', languageController.getAllLanguage)
-router.post('/', languagePostValidator, languageController.postLanguage)
-router.put('/:id', languagePutValidator, languageController.putLanguage)
-router.delete('/:id', languageDeleteValidator, languageController.deleteLanguage)
+router.post('/', authMiddleware.varifyToken, authMiddleware.requireRole(["admin"]), languagePostValidator, languageController.postLanguage)
+router.put('/:id', authMiddleware.varifyToken, authMiddleware.requireRole(["admin"]), languagePutValidator, languageController.putLanguage)
+router.delete('/:id', authMiddleware.varifyToken, authMiddleware.requireRole(["admin"]), languageDeleteValidator, languageController.deleteLanguage)
 router.all('/', methodNotAllowed)
 router.all('/:id', methodNotAllowed)
 
