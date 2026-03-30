@@ -204,7 +204,31 @@ const userController = {
         })
     },
 
-    //TODO swagger
+    /**
+     * @swagger
+     * /api/felhasznalok/token-frissites:
+     *   post:
+     *     summary: Token frissítése.
+     *     description: Ez a végpont lehetővé teszi a felhasználó tokenének frissítését.
+     *     tags: ["Felhasznalok"]
+     *     responses:
+     *       200:
+     *         description: Sikeres frissítés
+     *         content:
+     *           application/json:
+     *             schema:
+     *               type: object
+     *               properties:
+     *                 accessToken:
+     *                   type: string
+     *                   description: "Az azonosításhoz szükséges token"
+     *       401:
+     *         description: Nincs refresh token! Új access token nem generálható!
+     *       403:
+     *         description: Érvénytelen vagy lejárt refresh token!
+     *       500:
+     *         description: Belső szerverhiba!
+     */
     refreshToken: (req, res, next) => {
         const { refreshToken } = req.cookies
 
@@ -241,7 +265,19 @@ const userController = {
         }
     },
 
-    //TODO swagger
+    /**
+     * @swagger
+     * /api/felhasznalok/kijelentkezes:
+     *   post:
+     *     summary: Felhasználóval kijelentkezés.
+     *     description: Ez a végpont lehetővé teszi a felhasználó kijelentkezését.
+     *     tags: ["Felhasznalok"]
+     *     responses:
+     *       200:
+     *         description: Sikeres kijelentkezés
+     *       500:
+     *         description: Belső szerverhiba!
+     */
     logoutUser: (req, res, next) => {
         res.clearCookie("refreshToken", {
             httpOnly: false,
