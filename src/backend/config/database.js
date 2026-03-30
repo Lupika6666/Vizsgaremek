@@ -1,6 +1,9 @@
 const path = require('path')
-require('dotenv').config({path: path.join(__dirname, '../.env')})
 const mysql = require('mysql2')
+
+const envFile = process.env.NODE_ENV === 'test' ? './.env.test' : './.env';
+
+require('dotenv').config({path: path.join(__dirname, envFile)})
 
 const db = mysql.createConnection({
     host: process.env.DB_HOST,

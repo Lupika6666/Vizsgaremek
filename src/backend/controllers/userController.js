@@ -57,12 +57,11 @@ const userController = {
         const hashedJelszo = await hashPassword(jelszo);
 
         User.insertUser(email, hashedJelszo, nev, olvaso_id, (err, result) => {
-
             if (err) {
                 if (err.code === "ER_DUP_ENTRY") {
                     return res.status(400).json({ "valasz": "A megadott email címmel már regisztráltak." });
                 }
-                next(err);
+                return next(err);
             }
 
             res.status(201).json({ "valasz": "Sikeres regisztráció!" });
@@ -292,4 +291,3 @@ const userController = {
 }
 
 module.exports = userController
-
