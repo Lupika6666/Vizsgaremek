@@ -1,24 +1,32 @@
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { useAuthors } from "../../../features/authors/stores/authorProvider";
 import { useEffect } from "react";
 import { EditAuthorForm } from "../../../features/authors/components/EditAuthorForm";
+import { LoadingScreen } from "../../../components/LoadingScreen";
 
 export function EditAuthorPage(){
     const {id} = useParams();
     
     const { authors, selectedAuthor, isLoading: isLoadingAuthors, getAuthors, getAuthorById, createAuthor, updateAuthor, deleteAuthor } = useAuthors();
 
-    const author = authors.find(item=>item.id==id);
+    if (isLoadingAuthors) {
+        return (
+            <div>
+                <LoadingScreen/>
+            </div>
+        )
+    }
     
-    // useEffect(
-    //     ()=>{
-    //         getAuthorById(id);
-    //     }, []
-    // )
+    const author = authors.find(item=>item.id==id);
 
     return(
         <div>
             <EditAuthorForm author={author} updateAuthor={updateAuthor}/>
+            <div  className="card shadow p-3">
+                <div>
+                    <Link className="btn btn-outline-secondary btn-sm" to="/szerzok" title="mégse"><i class="bi bi-arrow-left"></i></Link>
+                </div>
+            </div>
         </div>
     )
 }

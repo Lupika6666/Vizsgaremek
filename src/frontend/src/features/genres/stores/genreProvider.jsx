@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { Genre } from "../models/Genre";
 import { genreApi } from "../api/genreApi";
+import { toast } from "sonner";
+import { toastErrorNotifier } from "../../../utils/toastErrorNotifier";
 
 const GenreContext = createContext(null);
 
@@ -39,31 +41,37 @@ export function GenreProvider({ children }) {
 
     const createGenre = async (genreName) => {
         try {
-            await genreApi.create(genreName);
+            const response = await genreApi.create(genreName);
             await getGenres();
+            toast.success(response.data.valasz);
         }
         catch (error) {
             console.error("Hiba az új műfaj felvitele során", error);
+            toastErrorNotifier(error);
         }
     }
 
     const updateGenre = async (id, genreName) => {
         try {
-            await genreApi.update(id, genreName);
+            const response = await genreApi.update(id, genreName);
             await getGenres();
+            toast.success(response.data.valasz);
         }
         catch (error) {
             console.error("Hiba a megadott műfaj szerkesztése során", error);
+            toastErrorNotifier(error);
         }
     }
 
     const deleteGenre = async (id) => {
         try {
-            await genreApi.delete(id);
+            const response = await genreApi.delete(id);
             await getGenres();
+            toast.success(response.data.valasz);
         }
         catch (error) {
             console.error("Hiba a megadott műfaj törlése során", error);
+            toastErrorNotifier(error);
         }
     }
 

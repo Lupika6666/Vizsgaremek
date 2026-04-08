@@ -20,7 +20,7 @@ export function AppProvider() {
                             <BookCopyProvider>
                                 <ReaderProvider>
                                     <BorrowingProvider>
-                                        <Toaster richColors />
+                                        <Toaster richColors expand={true} visibleToasts={5} />
                                         <RouterProvider router={router} />
                                     </BorrowingProvider>
                                 </ReaderProvider>

@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { bookCopyApi } from "../api/bookCopyApi";
 import { BookCopy } from "../models/BookCopy";
+import { toast } from "sonner";
+import { toastErrorNotifier } from "../../../utils/toastErrorNotifier";
 
 const BookCopyContext = createContext(null);
 
@@ -39,31 +41,37 @@ export function BookCopyProvider({ children }) {
 
     const createBookCopy = async (data) => {
         try {
-            await bookCopyApi.create(data);
+            const response = await bookCopyApi.create(data);
             await getBookCopies();
+            toast.success(response.data.valasz);
         }
         catch (error) {
             console.error("Hiba az új példány felvitele során");
+            toastErrorNotifier(error);
         }
     }
 
     const updateBookCopy = async (data) => {
         try {
-            await bookCopyApi.update(data.id, data);
+            const response = await bookCopyApi.update(data.id, data);
             await getBookCopies();
+            toast.success(response.data.valasz);
         }
         catch (error) {
             console.error("Hiba amegadott példány szerkesztése során");
+            toastErrorNotifier(error);
         }
     }
 
     const deleteBookCopy = async (id) => {
         try {
-            await bookCopyApi.delete(id);
+            const response = await bookCopyApi.delete(id);
             await getBookCopies();
+            toast.success(response.data.valasz);
         }
         catch (error) {
             console.error("Hiba a megadott példány törlése során");
+            toastErrorNotifier(error);
         }
     }
 

@@ -37,6 +37,8 @@ import { DeleteBorrowingPage } from "./pages/borrowings/DeleteBorrowingPage";
 import { LoginPage } from "./pages/user/LoginPage";
 import { RegisterPage } from "./pages/user/RegisterPage";
 import { ProtectedRoute } from "../components/ProtectedRoute";
+import { AccountDetailsPage } from "./pages/user/AccountDetailsPage";
+import { NotFoundPath } from "../components/NotFoundPath";
 
 export const router = createBrowserRouter(
     [
@@ -56,6 +58,7 @@ export const router = createBrowserRouter(
                 {
                     path: "/",
                     element: <MainLayout />,
+                    errorElement: <NotFoundPath/>,
                     children: [
                         {
                             index: true,
@@ -230,6 +233,11 @@ export const router = createBrowserRouter(
                                     element: <DeleteReaderPage />
                                 }
                             ]
+                        },
+
+                        {
+                            path: "fiok",
+                            element: <AccountDetailsPage />
                         }
                     ]
                 }

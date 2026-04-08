@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { Author } from "../models/Author";
 import { authorApi } from "../api/authorApi";
+import { toast } from "sonner";
+import { toastErrorNotifier } from "../../../utils/toastErrorNotifier";
 
 const AuthorContext = createContext(null);
 
@@ -39,31 +41,37 @@ export function AuthorProvider({ children }) {
 
     const createAuthor = async (authorName) => {
         try {
-            await authorApi.create(authorName);
+            const response = await authorApi.create(authorName);
             await getAuthors();
+            toast.success(response.data.valasz);
         }
         catch (error) {
             console.error("Hiba az új szerző felvitele során", error);
+            toastErrorNotifier(error);
         }
     }
 
     const updateAuthor = async (id, authorName) => {
         try {
-            await authorApi.update(id, authorName);
+            const response = await authorApi.update(id, authorName);
             await getAuthors();
+            toast.success(response.data.valasz);
         }
         catch (error) {
             console.error("Hiba a megadott szerző szerkesztése során", error);
+            toastErrorNotifier(error);
         }
     }
 
     const deleteAuthor = async (id) => {
         try {
-            await authorApi.delete(id);
+            const response = await authorApi.delete(id);
             await getAuthors();
+            toast.success(response.data.valasz);
         }
         catch (error) {
             console.error("Hiba a megadott szerző törlése során", error);
+            toastErrorNotifier(error);
         }
     }
 

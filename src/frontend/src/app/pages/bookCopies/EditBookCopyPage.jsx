@@ -25,7 +25,11 @@ export function EditBookCopyPage() {
     return (
         <div>
             <EditBookCopyForm bookCopy={selectedBookCopy} updateBookCopy={updateBookCopy} />
-            <Link className="btn btn-secondary" to="/peldanyok">Vissza</Link>
+            <div className="card shadow p-3">
+                <div>
+                    <Link className="btn btn-outline-secondary btn-sm me-2" to={`/peldanyok?konyvid=${selectedBookCopy.konyv_id}`} title="példány lista"><i class="bi bi-arrow-left"></i></Link>
+                </div>
+            </div>
         </div>
     )
 }

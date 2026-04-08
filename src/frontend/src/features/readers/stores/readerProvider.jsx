@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { readerApi } from "../api/readerApi";
 import { Reader } from "../models/Reader";
+import { toast } from "sonner";
+import { toastErrorNotifier } from "../../../utils/toastErrorNotifier";
 
 const ReaderContext = createContext(null);
 
@@ -39,31 +41,37 @@ export function ReaderProvider({ children }) {
 
     const createReader = async (data) => {
         try {
-            await readerApi.create(data);
+            const response = await readerApi.create(data);
             await getReaders();
+            toast.success(response.data.valasz);
         }
         catch (error) {
             console.error("Hiba az új olvasó felvitele során");
+            toastErrorNotifier(error);
         }
     }
 
     const updateReader = async (data) => {
         try {
-            await readerApi.update(data.kartyaszam, data);
+            const response = await readerApi.update(data.kartyaszam, data);
             await getReaders();
+            toast.success(response.data.valasz);
         }
         catch (error) {
             console.error("Hiba amegadott olvasó szerkesztése során");
+            toastErrorNotifier(error);
         }
     }
 
     const deleteReader = async (id) => {
         try {
-            await readerApi.delete(id);
+            const response = await readerApi.delete(id);
             await getReaders();
+            toast.success(response.data.valasz);
         }
         catch (error) {
             console.error("Hiba a megadott olvasó törlése során");
+            toastErrorNotifier(error);
         }
     }
 

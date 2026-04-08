@@ -1,10 +1,11 @@
 import { BookList } from "../../../features/books/components/BookList";
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import { useBooks } from "../../../features/books/stores/bookProvider";
 import { useLanguages } from "../../../features/languages/stores/languageProvider";
 import { useAuthors } from "../../../features/authors/stores/authorProvider";
 import { useGenres } from "../../../features/genres/stores/genreProvider";
 import { useUser } from "../../../features/user/stores/userProvider";
+import { LoadingScreen } from "../../../components/LoadingScreen";
 
 export function BookListPage() {
     const { user } = useUser();
@@ -14,10 +15,26 @@ export function BookListPage() {
     const { authors, selectedAuthor, isLoading: isLoadingAuthors, getAuthors, getAuthorById, createAuthor, updateAuthor, deleteAuthor } = useAuthors();
     const { genres, selectedGenre, isLoading: isLoadingGenres, getGenres, getGenreById, createGenre, updateGenre, deleteGenre } = useGenres();
 
+    const [searchParams] = useSearchParams();
+
+    const page = searchParams.has("oldal") ? Number(searchParams.get("oldal")) : 1;
+
+    if (isLoadingBooks, isLoadingLanguages, isLoadingAuthors, isLoadingGenres) {
+        return (
+            <div>
+                <LoadingScreen/>
+            </div>
+        )
+    }
+
     return (
         <div>
-            <BookList books={books} />
-            {user.isAdmin() && (<Link className="btn btn-primary" to="/konyvek/uj">Új könyv felvétele</Link>)}
+            <BookList books={books} page={page} />
+            {user.isAdmin() && (<div className="card shadow p-3">
+                <div>
+                    <Link className="btn btn-outline-primary btn-sm me-2" to="/konyvek/uj" title="új könyv felvétele"><i class="bi bi-plus-lg"></i></Link>
+                </div>
+            </div>)}
         </div>
     )
 }

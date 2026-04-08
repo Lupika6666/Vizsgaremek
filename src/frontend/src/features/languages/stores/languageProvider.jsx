@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { Language } from "../models/Language";
 import { languageApi } from "../api/languageApi";
+import { toast } from "sonner";
+import { toastErrorNotifier } from "../../../utils/toastErrorNotifier";
 
 const LanguageContext = createContext(null);
 
@@ -39,31 +41,37 @@ export function LanguageProvider({ children }) {
 
     const createLanguage = async (languageName) => {
         try {
-            await languageApi.create(languageName);
+            const response = await languageApi.create(languageName);
             await getLanguages();
+            toast.success(response.data.valasz);
         }
         catch (error) {
             console.error("Hiba az új nyelv felvitele során", error);
+            toastErrorNotifier(error);
         }
     }
 
     const updateLanguage = async (id, languageName) => {
         try {
-            await languageApi.update(id, languageName);
+            const response = await languageApi.update(id, languageName);
             await getLanguages();
+            toast.success(response.data.valasz);
         }
         catch (error) {
             console.error("Hiba a megadott nyelv szerkesztése során", error);
+            toastErrorNotifier(error);
         }
     }
 
     const deleteLanguage = async (id) => {
         try {
-            await languageApi.delete(id);
+            const response = await languageApi.delete(id);
             await getLanguages();
+            toast.success(response.data.valasz);
         }
         catch (error) {
             console.error("Hiba a megadott nyelv törlése során", error);
+            toastErrorNotifier(error);
         }
     }
 

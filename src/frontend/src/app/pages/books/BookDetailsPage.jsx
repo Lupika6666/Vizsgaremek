@@ -5,12 +5,13 @@ import { useBooks } from "../../../features/books/stores/bookProvider";
 import { useBookCopies } from "../../../features/bookCopies/stores/bookCopyProvider";
 import { AddBookCopyForm } from "../../../features/bookCopies/components/AddBookCopyForm";
 import { useUser } from "../../../features/user/stores/userProvider";
+import { LoadingScreen } from "../../../components/LoadingScreen";
 
 export function BookDetailsPage() {
     const { user } = useUser();
     const { id } = useParams();
     const { books, selectedBook, isLoading: isLoadingBooks, getBooks, getBookById, createBook, updateBook, deleteBook } = useBooks();
-    const { bookCopies, selectedBookCopy, isLoading, getBookCopies, getBookCopyById, createBookCopy, updateBookCopy, deleteBookCopy } = useBookCopies();
+    const { bookCopies, selectedBookCopy, isLoading: isLoadingBookCopies, getBookCopies, getBookCopyById, createBookCopy, updateBookCopy, deleteBookCopy } = useBookCopies();
 
     useEffect(
         () => {
@@ -18,14 +19,25 @@ export function BookDetailsPage() {
         }, []
     );
 
+    if (isLoadingBooks, isLoadingBookCopies) {
+        return (
+            <div>
+                <LoadingScreen/>
+            </div>
+        )
+    }
+
     return (
         <div>
             <BookDetails book={selectedBook} />
-            {user.isAdmin() && (<Link className="btn btn-primary m-2" to={`/konyvek/szerkesztes/${id}`}>Szerkesztés</Link>)}
-            {user.isAdmin() && (<Link className="btn btn-danger m-2" to={`/konyvek/torles/${id}`}>Törlés</Link>)}
-            <Link className="btn btn-secondary m-2" to="/konyvek">Vissza</Link>
-            <Link className="btn btn-secondary m-2" to={`/peldanyok?konyvid=${id}`}>Példányok</Link>
-            {user.isAdmin() && (<h4>Új példány hozzáadása</h4>)}
+            <div className="card shadow p-3">
+                <div>
+                    <Link className="btn btn-outline-primary btn-sm me-2" to={`/peldanyok?konyvid=${id}`} title="példányok"><i class="bi bi-bookshelf"></i></Link>
+                    {user.isAdmin() && (<Link className="btn btn-outline-primary btn-sm me-2" to={`/konyvek/szerkesztes/${id}`} title="szerkesztés"><i class="bi bi-pencil-square"></i></Link>)}
+                    {user.isAdmin() && (<Link className="btn btn-outline-danger btn-sm me-3" to={`/konyvek/torles/${id}`} title="törlés"><i class="bi bi-trash"></i></Link>)}
+                    <Link className="btn btn-outline-secondary btn-sm me-2" to={`/konyvek`} title="könyv lista"><i class="bi bi-arrow-left"></i></Link>
+                </div>
+            </div>
             {user.isAdmin() && (<AddBookCopyForm selectedBookId={id} createBookCopy={createBookCopy} />)}
         </div>
     )

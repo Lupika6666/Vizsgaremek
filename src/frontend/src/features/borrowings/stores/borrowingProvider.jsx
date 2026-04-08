@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { borrowingApi } from "../api/borrowingApi";
 import { Borrowing } from "../models/Borrowing";
+import { toast } from "sonner";
+import { toastErrorNotifier } from "../../../utils/toastErrorNotifier";
 
 const BorrowingContext = createContext(null);
 
@@ -39,31 +41,37 @@ export function BorrowingProvider({ children }) {
 
     const createBorrowing = async (data) => {
         try {
-            await borrowingApi.create(data);
+            const response = await borrowingApi.create(data);
             await getBorrowings();
+            toast.success(response.data.valasz);
         }
         catch (error) {
             console.error("Hiba az új kölcsönzés felvitele során");
+            toastErrorNotifier(error);
         }
     }
 
     const updateBorrowing = async (data) => {
         try {
-            await borrowingApi.update(data.id, data);
+            const response = await borrowingApi.update(data.id, data);
             await getBorrowings();
+            toast.success(response.data.valasz);
         }
         catch (error) {
             console.error("Hiba amegadott kölcsönzés szerkesztése során");
+            toastErrorNotifier(error);
         }
     }
 
     const deleteBorrowing = async (id) => {
         try {
-            await borrowingApi.delete(id);
+            const response = await borrowingApi.delete(id);
             await getBorrowings();
+            toast.success(response.data.valasz);
         }
         catch (error) {
             console.error("Hiba a megadott kölcsönzés törlése során");
+            toastErrorNotifier(error);
         }
     }
 

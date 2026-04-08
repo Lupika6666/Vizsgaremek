@@ -14,18 +14,14 @@ export function NavigationBar() {
 
     return (
         <div>
-            <nav className="navbar navbar-expand-lg bg-body-tertiary">
-                <div className="container-fluid">
+            <nav className="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+                <div className="container-fluid px-3 px-lg-5">
                     <Link className="navbar-brand">E-Könyvtár</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
-                        <ul className="navbar-nav">
-
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/">Főoldal</NavLink>
-                            </li>
+                        <ul className="navbar-nav me-auto">
 
                             {user.isAdmin() && (<li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle" to="/konyvek" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -33,7 +29,6 @@ export function NavigationBar() {
                                 </Link>
                                 <ul className="dropdown-menu">
                                     <li><Link className="dropdown-item" to="/konyvek">Könyvek</Link></li>
-                                    <li><Link className="dropdown-item" to="/peldanyok">Példányok</Link></li>
                                     <li><Link className="dropdown-item" to="/nyelvek">Nyelvek</Link></li>
                                     <li><Link className="dropdown-item" to="/szerzok">Szerzők</Link></li>
                                     <li><Link className="dropdown-item" to="/mufajok">Műfajok</Link></li>
@@ -54,9 +49,11 @@ export function NavigationBar() {
 
                         </ul>
 
+                        <NavLink className="btn btn-outline-light btn-sm m-3" to="/fiok"><i class="bi bi-person me-2"></i>{user.nev}</NavLink>
+
                         {user && (
                             <button type="button" className="btn btn-outline-danger btn-sm" onClick={handleLogout}>
-                                Kijelentkezés
+                                <i class="bi bi-box-arrow-right me-2"></i>Kijelentkezés
                             </button>
                         )}
                     </div>
