@@ -21,7 +21,7 @@ export function EditLanguageForm({ language, updateLanguage }) {
                 <div className="input-group mb-3">
                     <label className="input-group-text" htmlFor="newLanguage">Nyelv</label>
                     <input type="text" className="form-control" id="newLanguage" value={name} onChange={(e) => setName(e.target.value)} required minLength={2} maxLength={25} />
-                    <button onClick={handleEditLanguage} className="btn btn-outline-success btn-sm" title="mentés"><i class="bi bi-check-lg"></i></button>
+                    <button onClick={handleEditLanguage} className="btn btn-outline-success btn-sm" title="mentés"><i className="bi bi-check-lg"></i></button>
                 </div>
             </div>
         </div>

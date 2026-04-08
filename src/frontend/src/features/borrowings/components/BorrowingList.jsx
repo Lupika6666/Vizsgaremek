@@ -48,8 +48,8 @@ export function BorrowingList({ borrowings, role, page }) {
                                     <Link to={`/olvasok/${item.olvaso_id}`}>{item.olvaso_id}</Link>
                                 </td>)}
                                 {role === "admin" && (<td>
-                                    <Link className="btn btn-outline-primary btn-sm m-1 my-lg-0" to={`/kolcsonzesek/szerkesztes/${item.id}`} title="szerkesztés"><i class="bi bi-pencil-square"></i></Link>
-                                    <Link className="btn btn-outline-danger btn-sm m-1 my-lg-0" to={`/kolcsonzesek/torles/${item.id}`} title="törlés"><i class="bi bi-trash"></i></Link>
+                                    <Link className="btn btn-outline-primary btn-sm m-1 my-lg-0" to={`/kolcsonzesek/szerkesztes/${item.id}`} title="szerkesztés"><i className="bi bi-pencil-square"></i></Link>
+                                    <Link className="btn btn-outline-danger btn-sm m-1 my-lg-0" to={`/kolcsonzesek/torles/${item.id}`} title="törlés"><i className="bi bi-trash"></i></Link>
                                 </td>)}
                             </tr>
                         )

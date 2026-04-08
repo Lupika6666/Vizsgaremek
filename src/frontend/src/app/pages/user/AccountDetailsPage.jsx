@@ -14,7 +14,7 @@ export function AccountDetailsPage() {
             <AccountDetails currentUser={user} currentReader={currentReader} />
             <div className="card shadow p-3">
                 <div>
-                    <Link className="btn btn-outline-primary btn-sm me-2" to={`/kolcsonzesek?kartyaszam=${user.olvaso_id}`} title="kölcsönzések"><i class="bi bi-person-lines-fill"></i></Link>
+                    <Link className="btn btn-outline-primary btn-sm me-2" to={`/kolcsonzesek?kartyaszam=${user.olvaso_id}`} title="kölcsönzések"><i className="bi bi-person-lines-fill"></i></Link>
                 </div>
             </div>
         </div>

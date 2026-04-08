@@ -21,7 +21,7 @@ export function EditGenreForm({ genre, updateGenre }) {
                 <div className="input-group mb-3">
                     <label className="input-group-text" htmlFor="newGenre">Műfaj</label>
                     <input type="text" className="form-control" id="newGenre" value={name} onChange={(e) => setName(e.target.value)} required minLength={2} maxLength={25} />
-                    <button onClick={handleEditGenre} className="btn btn-outline-success btn-sm" title="mentés"><i class="bi bi-check-lg"></i></button>
+                    <button onClick={handleEditGenre} className="btn btn-outline-success btn-sm" title="mentés"><i className="bi bi-check-lg"></i></button>
                 </div>
             </div>
         </div>

@@ -67,7 +67,7 @@ export function BorrowingListPage() {
                 </div>
                 {user.isAdmin() && (<div className="card shadow p-3">
                     <div>
-                        <Link className="btn btn-outline-primary btn-sm me-2" to={`/kolcsonzesek/uj?kartyaszam=${readerIdFromParam}`} title="új kölcsönzés felvétele"><i class="bi bi-plus-lg"></i></Link>
+                        <Link className="btn btn-outline-primary btn-sm me-2" to={`/kolcsonzesek/uj?kartyaszam=${readerIdFromParam}`} title="új kölcsönzés felvétele"><i className="bi bi-plus-lg"></i></Link>
                     </div>
                 </div>)}
             </div>
@@ -85,7 +85,7 @@ export function BorrowingListPage() {
             </div>
             {user.isAdmin() && (<div className="card shadow p-3">
                 <div>
-                    <Link className="btn btn-outline-primary btn-sm me-2" to="/kolcsonzesek/uj" title="új kölcsönzés felvétele"><i class="bi bi-plus-lg"></i></Link>
+                    <Link className="btn btn-outline-primary btn-sm me-2" to="/kolcsonzesek/uj" title="új kölcsönzés felvétele"><i className="bi bi-plus-lg"></i></Link>
                 </div>
             </div>)}
         </div>

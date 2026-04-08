@@ -54,7 +54,7 @@ export function AddReaderForm({ readers, createReader }) {
                         <input type="text" className="form-control" id="newPhone" value={phone} onChange={(e) => setPhone(e.target.value)} required maxLength={12} />
                     </div>
 
-                    <button type="submit" className="btn btn-outline-success btn-sm" title="mentés"><i class="bi bi-check-lg"></i></button>
+                    <button type="submit" className="btn btn-outline-success btn-sm" title="mentés"><i className="bi bi-check-lg"></i></button>
                 </form>
             </div>
 

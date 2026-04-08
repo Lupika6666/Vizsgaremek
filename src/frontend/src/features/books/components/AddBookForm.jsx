@@ -92,7 +92,7 @@ export function AddBookForm({ languages, authors, genres, createBook }) {
                         </select>
                     </div>
 
-                    <button type="submit" className="btn btn-outline-success btn-sm" title="mentés"><i class="bi bi-check-lg"></i></button>
+                    <button type="submit" className="btn btn-outline-success btn-sm" title="mentés"><i className="bi bi-check-lg"></i></button>
                 </form>
             </div>
         </div>

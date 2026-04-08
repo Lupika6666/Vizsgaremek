@@ -26,7 +26,7 @@ export function AddBookPage() {
             <AddBookForm languages={languages} authors={authors} genres={genres} createBook={createBook} />
             <div  className="card shadow p-3">
                 <div>
-                    <Link className="btn btn-outline-secondary btn-sm me-2" to={`/konyvek`} title="könyv lista"><i class="bi bi-arrow-left"></i></Link>
+                    <Link className="btn btn-outline-secondary btn-sm me-2" to={`/konyvek`} title="könyv lista"><i className="bi bi-arrow-left"></i></Link>
                 </div>
             </div>
         </div>

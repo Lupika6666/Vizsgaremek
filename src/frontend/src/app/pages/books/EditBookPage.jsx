@@ -27,7 +27,7 @@ export function EditBookPage() {
             <EditBookForm book={selectedBook} languages={languages} authors={authors} genres={genres} updateBook={updateBook} />
             <div  className="card shadow p-3">
                 <div>
-                    <Link className="btn btn-outline-secondary btn-sm me-2" to={`/konyvek/${id}`} title="könyv lista"><i class="bi bi-arrow-left"></i></Link>
+                    <Link className="btn btn-outline-secondary btn-sm me-2" to={`/konyvek/${id}`} title="könyv lista"><i className="bi bi-arrow-left"></i></Link>
                 </div>
             </div>
         </div>

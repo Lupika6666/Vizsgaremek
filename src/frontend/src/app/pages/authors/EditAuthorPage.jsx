@@ -24,7 +24,7 @@ export function EditAuthorPage(){
             <EditAuthorForm author={author} updateAuthor={updateAuthor}/>
             <div  className="card shadow p-3">
                 <div>
-                    <Link className="btn btn-outline-secondary btn-sm" to="/szerzok" title="mégse"><i class="bi bi-arrow-left"></i></Link>
+                    <Link className="btn btn-outline-secondary btn-sm" to="/szerzok" title="mégse"><i className="bi bi-arrow-left"></i></Link>
                 </div>
             </div>
         </div>

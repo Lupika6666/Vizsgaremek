@@ -32,10 +32,10 @@ export function BookDetailsPage() {
             <BookDetails book={selectedBook} />
             <div className="card shadow p-3">
                 <div>
-                    <Link className="btn btn-outline-primary btn-sm me-2" to={`/peldanyok?konyvid=${id}`} title="példányok"><i class="bi bi-bookshelf"></i></Link>
-                    {user.isAdmin() && (<Link className="btn btn-outline-primary btn-sm me-2" to={`/konyvek/szerkesztes/${id}`} title="szerkesztés"><i class="bi bi-pencil-square"></i></Link>)}
-                    {user.isAdmin() && (<Link className="btn btn-outline-danger btn-sm me-3" to={`/konyvek/torles/${id}`} title="törlés"><i class="bi bi-trash"></i></Link>)}
-                    <Link className="btn btn-outline-secondary btn-sm me-2" to={`/konyvek`} title="könyv lista"><i class="bi bi-arrow-left"></i></Link>
+                    <Link className="btn btn-outline-primary btn-sm me-2" to={`/peldanyok?konyvid=${id}`} title="példányok"><i className="bi bi-bookshelf"></i></Link>
+                    {user.isAdmin() && (<Link className="btn btn-outline-primary btn-sm me-2" to={`/konyvek/szerkesztes/${id}`} title="szerkesztés"><i className="bi bi-pencil-square"></i></Link>)}
+                    {user.isAdmin() && (<Link className="btn btn-outline-danger btn-sm me-3" to={`/konyvek/torles/${id}`} title="törlés"><i className="bi bi-trash"></i></Link>)}
+                    <Link className="btn btn-outline-secondary btn-sm me-2" to={`/konyvek`} title="könyv lista"><i className="bi bi-arrow-left"></i></Link>
                 </div>
             </div>
             {user.isAdmin() && (<AddBookCopyForm selectedBookId={id} createBookCopy={createBookCopy} />)}

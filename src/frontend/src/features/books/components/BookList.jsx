@@ -145,10 +145,10 @@ export function BookList({ books, page }) {
                                         <td>{item.szerzo_id}</td>
                                         <td>{item.mufaj_id}</td>
                                         <td>
-                                            <Link className="btn btn-outline-primary btn-sm m-1 my-lg-0" to={`/konyvek/${item.id}`} title="adatlap"><i class="bi bi-book"></i></Link>
-                                            <Link className="btn btn-outline-primary btn-sm m-1 my-lg-0" to={`/peldanyok?konyvid=${item.id}`} title="példányok"><i class="bi bi-bookshelf"></i></Link>
-                                            {user.isAdmin() && (<Link className="btn btn-outline-primary btn-sm m-1 my-lg-0" to={`/konyvek/szerkesztes/${item.id}`} title="szerkesztés"><i class="bi bi-pencil-square"></i></Link>)}
-                                            {user.isAdmin() && (<Link className="btn btn-outline-danger btn-sm m-1 my-lg-0" to={`/konyvek/torles/${item.id}`} title="törlés"><i class="bi bi-trash"></i></Link>)}
+                                            <Link className="btn btn-outline-primary btn-sm m-1 my-lg-0" to={`/konyvek/${item.id}`} title="adatlap"><i className="bi bi-book"></i></Link>
+                                            <Link className="btn btn-outline-primary btn-sm m-1 my-lg-0" to={`/peldanyok?konyvid=${item.id}`} title="példányok"><i className="bi bi-bookshelf"></i></Link>
+                                            {user.isAdmin() && (<Link className="btn btn-outline-primary btn-sm m-1 my-lg-0" to={`/konyvek/szerkesztes/${item.id}`} title="szerkesztés"><i className="bi bi-pencil-square"></i></Link>)}
+                                            {user.isAdmin() && (<Link className="btn btn-outline-danger btn-sm m-1 my-lg-0" to={`/konyvek/torles/${item.id}`} title="törlés"><i className="bi bi-trash"></i></Link>)}
                                         </td>
                                     </tr>
                                 )

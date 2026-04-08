@@ -49,11 +49,11 @@ export function NavigationBar() {
 
                         </ul>
 
-                        <NavLink className="btn btn-outline-light btn-sm m-3" to="/fiok"><i class="bi bi-person me-2"></i>{user.nev}</NavLink>
+                        <NavLink className="btn btn-outline-light btn-sm m-3" to="/fiok"><i className="bi bi-person me-2"></i>{user.nev}</NavLink>
 
                         {user && (
                             <button type="button" className="btn btn-outline-danger btn-sm" onClick={handleLogout}>
-                                <i class="bi bi-box-arrow-right me-2"></i>Kijelentkezés
+                                <i className="bi bi-box-arrow-right me-2"></i>Kijelentkezés
                             </button>
                         )}
                     </div>

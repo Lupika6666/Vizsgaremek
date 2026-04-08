@@ -23,8 +23,8 @@ export function AuthorList({ authors, page }) {
                                 <tr key={item.id}>
                                     <td>{item.nev}</td>
                                     <td>
-                                        <Link className="btn btn-outline-primary btn-sm m-1 my-lg-0" to={`/szerzok/szerkesztes/${item.id}`} title="szerkesztés"><i class="bi bi-pencil-square"></i></Link>
-                                        <Link className="btn btn-outline-danger btn-sm m-1 my-lg-0" to={`/szerzok/torles/${item.id}`} title="törlés"><i class="bi bi-trash"></i></Link>
+                                        <Link className="btn btn-outline-primary btn-sm m-1 my-lg-0" to={`/szerzok/szerkesztes/${item.id}`} title="szerkesztés"><i className="bi bi-pencil-square"></i></Link>
+                                        <Link className="btn btn-outline-danger btn-sm m-1 my-lg-0" to={`/szerzok/torles/${item.id}`} title="törlés"><i className="bi bi-trash"></i></Link>
                                     </td>
                                 </tr>
                             )

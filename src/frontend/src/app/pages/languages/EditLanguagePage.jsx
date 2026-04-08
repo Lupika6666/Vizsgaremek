@@ -24,7 +24,7 @@ export function EditLanguagePage() {
             <EditLanguageForm language={language} updateLanguage={updateLanguage} />
             <div className="card shadow p-3">
                 <div>
-                    <Link className="btn btn-outline-secondary btn-sm" to="/nyelvek" title="mégse"><i class="bi bi-arrow-left"></i></Link>
+                    <Link className="btn btn-outline-secondary btn-sm" to="/nyelvek" title="mégse"><i className="bi bi-arrow-left"></i></Link>
                 </div>
             </div>
         </div>

@@ -99,10 +99,10 @@ export function ReaderList({ readers, page }) {
                                         <td>{item.email}</td>
                                         <td>{item.tel}</td>
                                         <td>
-                                            <Link className="btn btn-outline-primary btn-sm m-1 my-lg-0" to={`/olvasok/${item.kartyaszam}`} title="adatlap"><i class="bi bi-info-lg"></i></Link>
-                                            <Link className="btn btn-outline-primary btn-sm m-1 my-lg-0" to={`/kolcsonzesek?kartyaszam=${item.kartyaszam}`} title="kölcsönzések"><i class="bi bi-person-lines-fill"></i></Link>
-                                            <Link className="btn btn-outline-primary btn-sm m-1 my-lg-0" to={`/olvasok/szerkesztes/${item.kartyaszam}`} title="szerkesztés"><i class="bi bi-pencil-square"></i></Link>
-                                            <Link className="btn btn-outline-danger btn-sm m-1 my-lg-0" to={`/olvasok/torles/${item.kartyaszam}`} title="törlés"><i class="bi bi-trash"></i></Link>
+                                            <Link className="btn btn-outline-primary btn-sm m-1 my-lg-0" to={`/olvasok/${item.kartyaszam}`} title="adatlap"><i className="bi bi-info-lg"></i></Link>
+                                            <Link className="btn btn-outline-primary btn-sm m-1 my-lg-0" to={`/kolcsonzesek?kartyaszam=${item.kartyaszam}`} title="kölcsönzések"><i className="bi bi-person-lines-fill"></i></Link>
+                                            <Link className="btn btn-outline-primary btn-sm m-1 my-lg-0" to={`/olvasok/szerkesztes/${item.kartyaszam}`} title="szerkesztés"><i className="bi bi-pencil-square"></i></Link>
+                                            <Link className="btn btn-outline-danger btn-sm m-1 my-lg-0" to={`/olvasok/torles/${item.kartyaszam}`} title="törlés"><i className="bi bi-trash"></i></Link>
                                         </td>
                                     </tr>
                                 )

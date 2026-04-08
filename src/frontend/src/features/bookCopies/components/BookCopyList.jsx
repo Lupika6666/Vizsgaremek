@@ -49,8 +49,8 @@ export function BookCopyList({ bookCopies, books, borrowings, page }) {
                                     }
                                 </td>
                                 {user.isAdmin() && (<td>
-                                    <Link className="btn btn-outline-primary btn-sm m-1 my-lg-0" to={`/peldanyok/szerkesztes/${item.id}`} title="szerkesztés"><i class="bi bi-pencil-square"></i></Link>
-                                    <Link className="btn btn-outline-danger btn-sm m-1 my-lg-0" to={`/peldanyok/torles/${item.id}`} title="törlés"><i class="bi bi-trash"></i></Link>
+                                    <Link className="btn btn-outline-primary btn-sm m-1 my-lg-0" to={`/peldanyok/szerkesztes/${item.id}`} title="szerkesztés"><i className="bi bi-pencil-square"></i></Link>
+                                    <Link className="btn btn-outline-danger btn-sm m-1 my-lg-0" to={`/peldanyok/torles/${item.id}`} title="törlés"><i className="bi bi-trash"></i></Link>
                                 </td>)}
                             </tr>
                         )

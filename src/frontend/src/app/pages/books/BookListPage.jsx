@@ -32,7 +32,7 @@ export function BookListPage() {
             <BookList books={books} page={page} />
             {user.isAdmin() && (<div className="card shadow p-3">
                 <div>
-                    <Link className="btn btn-outline-primary btn-sm me-2" to="/konyvek/uj" title="új könyv felvétele"><i class="bi bi-plus-lg"></i></Link>
+                    <Link className="btn btn-outline-primary btn-sm me-2" to="/konyvek/uj" title="új könyv felvétele"><i className="bi bi-plus-lg"></i></Link>
                 </div>
             </div>)}
         </div>

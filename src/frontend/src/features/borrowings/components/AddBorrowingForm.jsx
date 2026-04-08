@@ -42,7 +42,7 @@ export function AddBorrowingForm({ createBorrowing, cardNumber }) {
                         <input type="number" className="form-control" id="newReaderId" value={readerId} onChange={(e) => setReaderId(e.target.value)} required min={1} />
                     </div>
 
-                    <button type="submit" className="btn btn-outline-success btn-sm" title="mentés"><i class="bi bi-check-lg"></i></button>
+                    <button type="submit" className="btn btn-outline-success btn-sm" title="mentés"><i className="bi bi-check-lg"></i></button>
                 </form>
             </div>
         </div>

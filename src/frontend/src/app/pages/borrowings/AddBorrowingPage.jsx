@@ -22,7 +22,7 @@ export function AddBorrowingPage() {
                 <AddBorrowingForm createBorrowing={createBorrowing} cardNumber={cardNumber} />
                 <div className="card shadow p-3">
                     <div>
-                        <Link className="btn btn-outline-secondary btn-sm me-2" to={`/kolcsonzesek?kartyaszam=${cardNumber}`} title="kölcsönzés lista"><i class="bi bi-arrow-left"></i></Link>
+                        <Link className="btn btn-outline-secondary btn-sm me-2" to={`/kolcsonzesek?kartyaszam=${cardNumber}`} title="kölcsönzés lista"><i className="bi bi-arrow-left"></i></Link>
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@ export function AddBorrowingPage() {
             <AddBorrowingForm createBorrowing={createBorrowing} cardNumber={''} />
             <div className="card shadow p-3">
                 <div>
-                    <Link className="btn btn-outline-secondary btn-sm me-2" to="/kolcsonzesek" title="kölcsönzés lista"><i class="bi bi-arrow-left"></i></Link>
+                    <Link className="btn btn-outline-secondary btn-sm me-2" to="/kolcsonzesek" title="kölcsönzés lista"><i className="bi bi-arrow-left"></i></Link>
                 </div>
             </div>
         </div>

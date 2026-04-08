@@ -21,7 +21,7 @@ export function EditAuthorForm({ author, updateAuthor }) {
                 <div className="input-group mb-3">
                     <label className="input-group-text" htmlFor="newAuthor">Név</label>
                     <input type="text" className="form-control" id="newAuthor" value={name} onChange={(e) => setName(e.target.value)} required minLength={2} maxLength={50} />
-                    <button onClick={handleEditAuthor} className="btn btn-outline-success btn-sm" title="mentés"><i class="bi bi-check-lg"></i></button>
+                    <button onClick={handleEditAuthor} className="btn btn-outline-success btn-sm" title="mentés"><i className="bi bi-check-lg"></i></button>
                 </div>
             </div>
 
