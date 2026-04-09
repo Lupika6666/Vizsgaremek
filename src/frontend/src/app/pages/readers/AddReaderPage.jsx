@@ -2,6 +2,8 @@ import { Link } from "react-router";
 import { AddReaderForm } from "../../../features/readers/components/AddReaderForm";
 import { useReaders } from "../../../features/readers/stores/readerProvider";
 import { LoadingScreen } from "../../../components/LoadingScreen";
+import { BreadcrumbElement } from "../../../components/BreadcrumbElement";
+import { NavigationElement } from "../../../components/NavigationElement";
 
 export function AddReaderPage() {
     const { readers, selectedReader, isLoading, getReaders, getReaderById, createReader, updateReader, deleteReader } = useReaders();
@@ -14,14 +16,16 @@ export function AddReaderPage() {
         )
     }
 
+    const breadcrumbRoutes = [
+        {link: "/", text: "Kezdőlap"},
+        {link: "/olvasok", text: "Olvasók"}
+    ];
+
     return (
         <div>
+            <BreadcrumbElement routes={breadcrumbRoutes} activeText={"Új"}/>
             <AddReaderForm readers={readers} createReader={createReader} />
-            <div className="card shadow p-3">
-                <div>
-                    <Link className="btn btn-outline-secondary btn-sm me-2" to={`/olvasok`} title="olvasó lista"><i className="bi bi-arrow-left"></i></Link>
-                </div>
-            </div>
+            <NavigationElement/>
         </div>
     )
 }

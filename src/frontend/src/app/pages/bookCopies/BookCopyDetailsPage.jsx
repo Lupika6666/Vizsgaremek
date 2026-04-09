@@ -4,13 +4,13 @@ import { useBookCopies } from "../../../features/bookCopies/stores/bookCopyProvi
 import { useEffect } from "react";
 import { useBooks } from "../../../features/books/stores/bookProvider";
 import { LoadingScreen } from "../../../components/LoadingScreen";
+import { BreadcrumbElement } from "../../../components/BreadcrumbElement";
+import { NavigationElement } from "../../../components/NavigationElement";
 
 export function BookCopyDetailsPage() {
     const { id } = useParams();
     const { bookCopies, selectedBookCopy, isLoading: isLoadingBookCopies, getBookCopies, getBookCopyById, createBookCopy, updateBookCopy, deleteBookCopy } = useBookCopies();
     const { books, selectedBook, isLoading: isLoadingBooks, getBooks, getBookById, createBook, updateBook, deleteBook } = useBooks();
-
-    const bookCopy = bookCopies.find(item => item.id == id);
 
     if (isLoadingBookCopies, isLoadingBooks) {
         return (
@@ -20,9 +20,18 @@ export function BookCopyDetailsPage() {
         )
     }
 
+    const bookCopyById = bookCopies.find(item => item.id == id);
+
+    const breadcrumbRoutes = [
+        {link: "/", text: "Kezdőlap"},
+        {link: "/peldanyok", text: "Példányok"}
+    ];
+
     return (
         <div>
-            <BookCopyDetails bookCopy={bookCopy} books={books} />
+            <BreadcrumbElement routes={breadcrumbRoutes} activeText={"Adatlap"}/>
+            <BookCopyDetails bookCopy={bookCopyById} books={books} />
+            <NavigationElement/>
         </div>
     )
 }

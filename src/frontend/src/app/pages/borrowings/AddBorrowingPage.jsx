@@ -2,6 +2,8 @@ import { Link, useSearchParams } from "react-router";
 import { AddBorrowingForm } from "../../../features/borrowings/components/AddBorrowingForm";
 import { useBorrowings } from "../../../features/borrowings/stores/borrowingProvider"
 import { LoadingScreen } from "../../../components/LoadingScreen";
+import { BreadcrumbElement } from "../../../components/BreadcrumbElement";
+import { NavigationElement } from "../../../components/NavigationElement";
 
 export function AddBorrowingPage() {
     const [searchParams] = useSearchParams();
@@ -14,29 +16,28 @@ export function AddBorrowingPage() {
             </div>
         )
     }
+
+    const breadcrumbRoutes = [
+        {link: "/", text: "Kezdőlap"},
+        {link: "/kolcsonzesek", text: "Kölcsönzések"}
+    ];
     
     if (searchParams.has("kartyaszam")) {
         const cardNumber = searchParams.get("kartyaszam");
         return (
             <div>
+                <BreadcrumbElement routes={breadcrumbRoutes} activeText={"Új"}/>
                 <AddBorrowingForm createBorrowing={createBorrowing} cardNumber={cardNumber} />
-                <div className="card shadow p-3">
-                    <div>
-                        <Link className="btn btn-outline-secondary btn-sm me-2" to={`/kolcsonzesek?kartyaszam=${cardNumber}`} title="kölcsönzés lista"><i className="bi bi-arrow-left"></i></Link>
-                    </div>
-                </div>
+                <NavigationElement/>
             </div>
         )
     }
 
     return (
         <div>
+            <BreadcrumbElement routes={breadcrumbRoutes} activeText={"Új"}/>
             <AddBorrowingForm createBorrowing={createBorrowing} cardNumber={''} />
-            <div className="card shadow p-3">
-                <div>
-                    <Link className="btn btn-outline-secondary btn-sm me-2" to="/kolcsonzesek" title="kölcsönzés lista"><i className="bi bi-arrow-left"></i></Link>
-                </div>
-            </div>
+            <NavigationElement/>
         </div>
     )
 }

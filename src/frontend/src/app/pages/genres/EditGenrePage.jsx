@@ -3,6 +3,8 @@ import { useGenres } from "../../../features/genres/stores/genreProvider";
 import { useEffect } from "react";
 import { EditGenreForm } from "../../../features/genres/components/EditGenreForm";
 import { LoadingScreen } from "../../../components/LoadingScreen";
+import { BreadcrumbElement } from "../../../components/BreadcrumbElement";
+import { NavigationElement } from "../../../components/NavigationElement";
 
 export function EditGenrePage() {
     const { id } = useParams();
@@ -17,16 +19,18 @@ export function EditGenrePage() {
         )
     }
 
-    const genre = genres.find(item => item.id == id);
+    const genreById = genres.find(item => item.id == id);
+
+    const breadcrumbRoutes = [
+        {link: "/", text: "Kezdőlap"},
+        {link: "/mufajok", text: "Műfajok"}
+    ];
 
     return (
         <div>
-            <EditGenreForm genre={genre} updateGenre={updateGenre} />
-            <div className="card shadow p-3">
-                <div>
-                    <Link className="btn btn-outline-secondary btn-sm" to="/mufajok" title="mégse"><i className="bi bi-arrow-left"></i></Link>
-                </div>
-            </div>
+            <BreadcrumbElement routes={breadcrumbRoutes} activeText={"Szerkesztés"}/>
+            <EditGenreForm genre={genreById} updateGenre={updateGenre} />
+            <NavigationElement/>
         </div>
     )
 }

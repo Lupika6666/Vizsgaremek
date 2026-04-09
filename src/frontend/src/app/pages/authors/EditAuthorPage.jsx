@@ -3,6 +3,8 @@ import { useAuthors } from "../../../features/authors/stores/authorProvider";
 import { useEffect } from "react";
 import { EditAuthorForm } from "../../../features/authors/components/EditAuthorForm";
 import { LoadingScreen } from "../../../components/LoadingScreen";
+import { BreadcrumbElement } from "../../../components/BreadcrumbElement";
+import { NavigationElement } from "../../../components/NavigationElement";
 
 export function EditAuthorPage(){
     const {id} = useParams();
@@ -17,16 +19,18 @@ export function EditAuthorPage(){
         )
     }
     
-    const author = authors.find(item=>item.id==id);
+    const authorById = authors.find(item=>item.id==id);
+
+    const breadcrumbRoutes = [
+        {link: "/", text: "Kezdőlap"},
+        {link: "/szerzok", text: "Szerzők"}
+    ];
 
     return(
         <div>
-            <EditAuthorForm author={author} updateAuthor={updateAuthor}/>
-            <div  className="card shadow p-3">
-                <div>
-                    <Link className="btn btn-outline-secondary btn-sm" to="/szerzok" title="mégse"><i className="bi bi-arrow-left"></i></Link>
-                </div>
-            </div>
+            <BreadcrumbElement routes={breadcrumbRoutes} activeText={"Szerkesztés"}/>
+            <EditAuthorForm author={authorById} updateAuthor={updateAuthor}/>
+            <NavigationElement/>
         </div>
     )
 }

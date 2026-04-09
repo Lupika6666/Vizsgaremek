@@ -3,6 +3,8 @@ import { useLanguages } from "../../../features/languages/stores/languageProvide
 import { useEffect } from "react";
 import { EditLanguageForm } from "../../../features/languages/components/EditLanguageForm";
 import { LoadingScreen } from "../../../components/LoadingScreen";
+import { BreadcrumbElement } from "../../../components/BreadcrumbElement";
+import { NavigationElement } from "../../../components/NavigationElement";
 
 export function EditLanguagePage() {
     const { id } = useParams();
@@ -17,16 +19,18 @@ export function EditLanguagePage() {
         )
     }
 
-    const language = languages.find(item => item.id == id);
+    const languageById = languages.find(item => item.id == id);
+
+    const breadcrumbRoutes = [
+        {link: "/", text: "Kezdőlap"},
+        {link: "/nyelvek", text: "Nyelvek"}
+    ];
 
     return (
         <div>
-            <EditLanguageForm language={language} updateLanguage={updateLanguage} />
-            <div className="card shadow p-3">
-                <div>
-                    <Link className="btn btn-outline-secondary btn-sm" to="/nyelvek" title="mégse"><i className="bi bi-arrow-left"></i></Link>
-                </div>
-            </div>
+            <BreadcrumbElement routes={breadcrumbRoutes} activeText={"Szerkesztés"}/>
+            <EditLanguageForm language={languageById} updateLanguage={updateLanguage} />
+            <NavigationElement/>
         </div>
     )
 }

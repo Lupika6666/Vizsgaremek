@@ -22,8 +22,8 @@ export function DeleteAuthorPage() {
         <div className="card shadow text-center">
             <div className="card-body">
                 <h5><span className="card-title text-danger">Biztos hogy törölni akarja?</span></h5>
-                <Link className="btn btn-danger m-2" onClick={handleDeleteButton} to="/szerzok">Igen</Link>
-                <Link className="btn btn-secondary m-2" to="/szerzok">Vissza</Link>
+                <Link className="btn btn-outline-danger m-2" onClick={handleDeleteButton} to="/szerzok">Igen</Link>
+                <Link className="btn btn-outline-secondary m-2" to="/szerzok">Vissza</Link>
             </div>
 
         </div>

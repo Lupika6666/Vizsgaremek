@@ -3,6 +3,8 @@ import { AddLanguageForm } from "../../../features/languages/components/AddLangu
 import { LanguageList } from "../../../features/languages/components/LanguageList";
 import { useLanguages } from "../../../features/languages/stores/languageProvider";
 import { LoadingScreen } from "../../../components/LoadingScreen";
+import { NavigationElement } from "../../../components/NavigationElement";
+import { BreadcrumbElement } from "../../../components/BreadcrumbElement";
 
 export function LanguageListPage() {
     const { languages, selectedLanguage, isLoading: isLoadingLanguages, getLanguages, getLanguageById, createLanguage, updateLanguage, deleteLanguage } = useLanguages();
@@ -19,10 +21,16 @@ export function LanguageListPage() {
         )
     }
 
+    const breadcrumbRoutes = [
+        {link: "/", text: "Kezdőlap"}
+    ];
+
     return (
         <div>
+            <BreadcrumbElement routes={breadcrumbRoutes} activeText={"Nyelvek"}/>
             <LanguageList languages={languages} page={page} />
             <AddLanguageForm createLanguage={createLanguage} />
+            <NavigationElement/>
         </div>
     )
 

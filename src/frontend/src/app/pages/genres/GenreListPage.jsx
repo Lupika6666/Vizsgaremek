@@ -3,6 +3,8 @@ import { AddGenreForm } from "../../../features/genres/components/AddGenreForm";
 import { GenreList } from "../../../features/genres/components/GenreList";
 import { useGenres } from "../../../features/genres/stores/genreProvider";
 import { LoadingScreen } from "../../../components/LoadingScreen";
+import { NavigationElement } from "../../../components/NavigationElement";
+import { BreadcrumbElement } from "../../../components/BreadcrumbElement";
 
 export function GenreListPage() {
     const { genres, selectedGenre, isLoading: isLoadingGenres, getGenres, getGenreById, createGenre, updateGenre, deleteGenre } = useGenres();
@@ -19,10 +21,16 @@ export function GenreListPage() {
         )
     }
 
+    const breadcrumbRoutes = [
+        {link: "/", text: "Kezdőlap"}
+    ];
+
     return (
         <div>
+            <BreadcrumbElement routes={breadcrumbRoutes} activeText={"Műfajok"}/>
             <GenreList genres={genres} page={page} />
             <AddGenreForm createGenre={createGenre} />
+            <NavigationElement/>
         </div>
     )
 

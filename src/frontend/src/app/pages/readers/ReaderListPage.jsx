@@ -2,6 +2,8 @@ import { Link, useSearchParams } from "react-router";
 import { ReaderList } from "../../../features/readers/components/ReaderList";
 import { useReaders } from "../../../features/readers/stores/readerProvider"
 import { LoadingScreen } from "../../../components/LoadingScreen";
+import { BreadcrumbElement } from "../../../components/BreadcrumbElement";
+import { NavigationElement } from "../../../components/NavigationElement";
 
 export function ReaderListPage() {
     const { readers, selectedReader, isLoading, getReaders, getReaderById, createReader, updateReader, deleteReader } = useReaders();
@@ -17,14 +19,20 @@ export function ReaderListPage() {
         )
     }
 
+    const breadcrumbRoutes = [
+        {link: "/", text: "Kezdőlap"}
+    ];
+
     return (
         <div>
+            <BreadcrumbElement routes={breadcrumbRoutes} activeText={"Olvasók"}/>
             <ReaderList readers={readers} page={page} />
             <div className="card shadow p-3">
                 <div>
                     <Link className="btn btn-outline-primary btn-sm me-2" to="/olvasok/uj" title="új olvasó felvétele"><i className="bi bi-plus-lg"></i></Link>
                 </div>
             </div>
+            <NavigationElement/>
         </div>
     )
 }

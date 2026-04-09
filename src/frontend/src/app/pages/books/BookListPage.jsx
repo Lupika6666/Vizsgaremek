@@ -6,6 +6,8 @@ import { useAuthors } from "../../../features/authors/stores/authorProvider";
 import { useGenres } from "../../../features/genres/stores/genreProvider";
 import { useUser } from "../../../features/user/stores/userProvider";
 import { LoadingScreen } from "../../../components/LoadingScreen";
+import { BreadcrumbElement } from "../../../components/BreadcrumbElement";
+import { NavigationElement } from "../../../components/NavigationElement";
 
 export function BookListPage() {
     const { user } = useUser();
@@ -27,14 +29,20 @@ export function BookListPage() {
         )
     }
 
+    const breadcrumbRoutes = [
+        {link: "/", text: "Kezdőlap"}
+    ];
+
     return (
         <div>
+            <BreadcrumbElement routes={breadcrumbRoutes} activeText={"Könyvek"}/>
             <BookList books={books} page={page} />
             {user.isAdmin() && (<div className="card shadow p-3">
                 <div>
                     <Link className="btn btn-outline-primary btn-sm me-2" to="/konyvek/uj" title="új könyv felvétele"><i className="bi bi-plus-lg"></i></Link>
                 </div>
             </div>)}
+            <NavigationElement/>
         </div>
     )
 }

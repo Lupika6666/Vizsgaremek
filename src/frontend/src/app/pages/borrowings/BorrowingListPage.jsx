@@ -7,6 +7,8 @@ import { useBooks } from "../../../features/books/stores/bookProvider";
 import { useUser } from "../../../features/user/stores/userProvider";
 import { PaginationElement } from "../../../components/PaginationElement";
 import { LoadingScreen } from "../../../components/LoadingScreen";
+import { BreadcrumbElement } from "../../../components/BreadcrumbElement";
+import { NavigationElement } from "../../../components/NavigationElement";
 
 export function BorrowingListPage() {
     const { user } = useUser();
@@ -21,10 +23,14 @@ export function BorrowingListPage() {
     if (isLoadingBorrowings, isLoadingReaders, isLoadingBookCopies) {
         return (
             <div>
-                <LoadingScreen/>
+                <LoadingScreen />
             </div>
         )
     }
+
+    const breadcrumbRoutes = [
+        { link: "/", text: "Kezdőlap" }
+    ];
 
     if (!user.isAdmin()) {
         const borrowingsByCurrentUser = borrowings.filter(item => item.olvaso_id == user.olvaso_id);
@@ -32,9 +38,13 @@ export function BorrowingListPage() {
         const route = "kolcsonzesek";
 
         return (
-            <div className="card shadow p-3">
-                <BorrowingList borrowings={borrowingsByCurrentUser} role={user.szerepkor} page={page} />
-                <PaginationElement page={page} maxPage={maxPage} route={route} />
+            <div>
+                <BreadcrumbElement routes={breadcrumbRoutes} activeText={"Kölcsönzések"} />
+                <div className="card shadow p-3">
+                    <BorrowingList borrowings={borrowingsByCurrentUser} role={user.szerepkor} page={page} />
+                    <PaginationElement page={page} maxPage={maxPage} route={route} />
+                </div>
+                <NavigationElement/>
             </div>
         )
     }
@@ -46,9 +56,13 @@ export function BorrowingListPage() {
         const route = `kolcsonzesek?peldanyid=${bookCopyId}`;
 
         return (
-            <div className="card shadow p-3">
-                <BorrowingList borrowings={borrowingsByBookCopy} role={user.szerepkor} page={page} />
-                <PaginationElement page={page} maxPage={maxPage} route={route} />
+            <div>
+                <BreadcrumbElement routes={breadcrumbRoutes} activeText={"Kölcsönzések"} />
+                <div className="card shadow p-3">
+                    <BorrowingList borrowings={borrowingsByBookCopy} role={user.szerepkor} page={page} />
+                    <PaginationElement page={page} maxPage={maxPage} route={route} />
+                </div>
+                <NavigationElement/>
             </div>
         )
     }
@@ -61,6 +75,7 @@ export function BorrowingListPage() {
 
         return (
             <div>
+                <BreadcrumbElement routes={breadcrumbRoutes} activeText={"Kölcsönzések"} />
                 <div className="card shadow p-3">
                     <BorrowingList borrowings={borrowingsByReader} role={user.szerepkor} page={page} />
                     <PaginationElement page={page} maxPage={maxPage} route={route} />
@@ -70,6 +85,7 @@ export function BorrowingListPage() {
                         <Link className="btn btn-outline-primary btn-sm me-2" to={`/kolcsonzesek/uj?kartyaszam=${readerIdFromParam}`} title="új kölcsönzés felvétele"><i className="bi bi-plus-lg"></i></Link>
                     </div>
                 </div>)}
+                <NavigationElement/>
             </div>
         )
     }
@@ -79,6 +95,7 @@ export function BorrowingListPage() {
 
     return (
         <div>
+            <BreadcrumbElement routes={breadcrumbRoutes} activeText={"Kölcsönzések"} />
             <div className="card shadow p-3">
                 <BorrowingList borrowings={borrowings} role={user.szerepkor} page={page} />
                 <PaginationElement page={page} maxPage={maxPage} route={route} />
@@ -88,6 +105,7 @@ export function BorrowingListPage() {
                     <Link className="btn btn-outline-primary btn-sm me-2" to="/kolcsonzesek/uj" title="új kölcsönzés felvétele"><i className="bi bi-plus-lg"></i></Link>
                 </div>
             </div>)}
+            <NavigationElement/>
         </div>
     )
 }

@@ -2,6 +2,8 @@ import { Link, useParams } from "react-router";
 import { useReaders } from "../../../features/readers/stores/readerProvider";
 import { EditReaderForm } from "../../../features/readers/components/EditReaderForm";
 import { LoadingScreen } from "../../../components/LoadingScreen";
+import { NavigationElement } from "../../../components/NavigationElement";
+import { BreadcrumbElement } from "../../../components/BreadcrumbElement";
 
 export function EditReaderPage() {
     const { id } = useParams();
@@ -15,16 +17,19 @@ export function EditReaderPage() {
         )
     }
 
-    const reader = readers.find(item => item.kartyaszam == id);
+    const readerById = readers.find(item => item.kartyaszam == id);
+
+    const breadcrumbRoutes = [
+        {link: "/", text: "Kezdőlap"},
+        {link: "/olvasok", text: "Olvasók"},
+        {link: `/olvasok/${id}`, text: "Adatlap"}
+    ];
 
     return (
         <div>
-            <EditReaderForm reader={reader} updateReader={updateReader} />
-            <div className="card shadow p-3">
-                <div>
-                    <Link className="btn btn-outline-secondary btn-sm me-2" to={`/olvasok/${id}`} title="olvasó adatlap"><i className="bi bi-arrow-left"></i></Link>
-                </div>
-            </div>
+            <BreadcrumbElement routes={breadcrumbRoutes} activeText={"Szerkesztés"}/>
+            <EditReaderForm reader={readerById} updateReader={updateReader} />
+            <NavigationElement/>
         </div>
     )
 }

@@ -5,6 +5,8 @@ import { useBooks } from "../../../features/books/stores/bookProvider";
 import { useGenres } from "../../../features/genres/stores/genreProvider";
 import { useLanguages } from "../../../features/languages/stores/languageProvider";
 import { LoadingScreen } from "../../../components/LoadingScreen";
+import { BreadcrumbElement } from "../../../components/BreadcrumbElement";
+import { NavigationElement } from "../../../components/NavigationElement";
 
 export function AddBookPage() {
 
@@ -20,15 +22,17 @@ export function AddBookPage() {
             </div>
         )
     }
+
+    const breadcrumbRoutes = [
+        {link: "/", text: "Kezdőlap"},
+        {link: "/konyvek", text: "Könyvek"}
+    ];
     
     return (
         <div>
+            <BreadcrumbElement routes={breadcrumbRoutes} activeText={"Új"}/>
             <AddBookForm languages={languages} authors={authors} genres={genres} createBook={createBook} />
-            <div  className="card shadow p-3">
-                <div>
-                    <Link className="btn btn-outline-secondary btn-sm me-2" to={`/konyvek`} title="könyv lista"><i className="bi bi-arrow-left"></i></Link>
-                </div>
-            </div>
+            <NavigationElement/>
         </div>
     )
 }
