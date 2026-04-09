@@ -2,22 +2,18 @@ import { useState } from "react"
 import { Borrowing } from "../models/Borrowing";
 
 export function EditBorrowingForm({ borrowing, updateBorrowing }) {
-    const [borrowingTime, setBorrowingTime] = useState(borrowing.kolcsonzes_ideje);
-    const [deadline, setDeadline] = useState(borrowing.hatarido);
+    const [borrowingTime, setBorrowingTime] = useState(borrowing.kolcsonzes_ideje.split('T')[0]);
+    const [deadline, setDeadline] = useState(borrowing.hatarido.split('T')[0]);
     const [bookCopyId, setBookCopyId] = useState(borrowing.peldany_id);
     const [readerId, setReaderId] = useState(borrowing.olvaso_id);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const borrowing = new Borrowing(borrowing.id, Date(borrowingTime), Date(deadline), Number(bookCopyId), Number(readerId));
+        const editedBorrowing = new Borrowing(borrowing.id, borrowingTime, deadline, Number(bookCopyId), Number(readerId));
 
-        updateBorrowing(borrowing);
+        updateBorrowing(editedBorrowing);
 
-        setBorrowingTime('');
-        setDeadline('');
-        setBookCopyId('');
-        setReaderId('');
     }
 
     return (
