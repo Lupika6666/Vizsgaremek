@@ -16,7 +16,7 @@ megtekintsék a könyvtárban található könyveket, és keresést végezzenek 
     - Adatbázis integráció és logger implementálása
     - Szerzők, műfajok, nyelvek, könyvek, könyv példányok, kölcsönzés, olvasók és felhasználók kezelése backend oldalon
     - Hibakezelés, validáció, autentikáció és autorizáció implementálása
-    - Sywagger implementálása és dokumentáció létrehozása
+    - Swagger implementálása és dokumentáció létrehozása
     - Teszteléshez szükséges konfigurációk beállítása
 
 
