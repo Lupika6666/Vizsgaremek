@@ -27,5 +27,8 @@
     "pageTitle": "API Tesztelési Dokumentáció",
     "executionTimeBadge": true,
     "includeConsoleLog": true
+  },
+  "devDependencies": {
+    "jest-html-reporter": "^4.4.0"
   }
 }
