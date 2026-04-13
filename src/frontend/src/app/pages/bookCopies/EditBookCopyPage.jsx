@@ -22,7 +22,7 @@ export function EditBookCopyPage() {
 
     const breadcrumbRoutes = [
         {link: "/", text: "Kezdőlap"},
-        {link: "/peldanyok", text: "Példányok"},
+        {link: `/peldanyok?konyvid=${bookCopyById.konyv_id}`, text: "Példányok"},
         {link: `/peldanyok/${id}`, text: "Adatlap"}
     ];
 

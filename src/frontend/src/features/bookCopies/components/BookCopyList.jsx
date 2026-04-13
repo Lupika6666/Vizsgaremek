@@ -17,7 +17,7 @@ export function BookCopyList({ bookCopies, books, borrowings, page }) {
         }
         return (
             <>
-                <Link to={`/kolcsonzesek?peldanyid=${found.id}`}>igen</Link>
+                <Link to={`/kolcsonzesek?peldanyid=${copy_id}`}>igen</Link>
             </>
         )
     }
