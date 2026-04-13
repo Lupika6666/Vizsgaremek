@@ -128,9 +128,9 @@ export function BookList({ books, page }) {
                                 <th>Cím</th>
                                 <th>ISBN</th>
                                 <th>Év</th>
-                                <th>Nyelv</th>
-                                <th>Szerző</th>
-                                <th>Műfaj</th>
+                                <th className="d-none d-md-table-cell">Nyelv</th>
+                                <th className="d-none d-md-table-cell">Szerző</th>
+                                <th className="d-none d-md-table-cell">Műfaj</th>
                                 <th>...</th>
                             </tr>
                         </thead>
@@ -141,9 +141,9 @@ export function BookList({ books, page }) {
                                         <td>{item.cim}</td>
                                         <td>{item.isbn}</td>
                                         <td>{item.publikalas_ev}</td>
-                                        <td>{item.nyelv_id}</td>
-                                        <td>{item.szerzo_id}</td>
-                                        <td>{item.mufaj_id}</td>
+                                        <td className="d-none d-md-table-cell">{item.nyelv_id}</td>
+                                        <td className="d-none d-md-table-cell">{item.szerzo_id}</td>
+                                        <td className="d-none d-md-table-cell">{item.mufaj_id}</td>
                                         <td>
                                             <Link className="btn btn-outline-primary btn-sm m-1 my-lg-0" to={`/konyvek/${item.id}`} title="adatlap"><i className="bi bi-book"></i></Link>
                                             <Link className="btn btn-outline-primary btn-sm m-1 my-lg-0" to={`/peldanyok?konyvid=${item.id}`} title="példányok"><i className="bi bi-bookshelf"></i></Link>

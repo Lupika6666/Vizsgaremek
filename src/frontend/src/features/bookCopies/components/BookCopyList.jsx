@@ -29,9 +29,9 @@ export function BookCopyList({ bookCopies, books, borrowings, page }) {
                     <tr>
                         {user.isAdmin() && (<th>ID</th>)}
                         <th>Hely</th>
-                        <th>Könyv ID</th>
+                        <th className="d-none d-md-table-cell">Könyv ID</th>
                         <th>Könyv cím</th>
-                        <th>Kikölcsönözve</th>
+                        <th>Kölcsönözve</th>
                         {user.isAdmin() && (<th>...</th>)}
                     </tr>
                 </thead>
@@ -41,7 +41,7 @@ export function BookCopyList({ bookCopies, books, borrowings, page }) {
                             <tr key={item.id}>
                                 {user.isAdmin() && (<td>{item.id}</td>)}
                                 <td>{item.hely}</td>
-                                <td>{item.konyv_id}</td>
+                                <td className="d-none d-md-table-cell">{item.konyv_id}</td>
                                 <td>{books.find(bk => bk.id == item.konyv_id).cim}</td>
                                 <td>
                                     {

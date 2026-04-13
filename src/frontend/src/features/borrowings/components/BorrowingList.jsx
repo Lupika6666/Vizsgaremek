@@ -26,7 +26,7 @@ export function BorrowingList({ borrowings, role, page }) {
             <table className="table table-hover table-bordered">
                 <thead>
                     <tr>
-                        {role === "admin" && (<th>ID</th>)}
+                        {role === "admin" && (<th className="d-none d-md-table-cell">ID</th>)}
                         <th>Kölcsönzés ideje</th>
                         <th>Határidő</th>
                         <th>Példány</th>
@@ -38,7 +38,7 @@ export function BorrowingList({ borrowings, role, page }) {
                     {borrowings.slice((page - 1) * elementsPerPage, page * elementsPerPage).map(
                         (item) => (
                             <tr key={item.id}>
-                                {role === "admin" && (<td>{item.id}</td>)}
+                                {role === "admin" && (<td className="d-none d-md-table-cell">{item.id}</td>)}
                                 <td>{item.kolcsonzes_ideje.split('T')[0]}</td>
                                 <td>{isExpired(item.hatarido)}</td>
                                 <td>

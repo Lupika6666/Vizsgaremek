@@ -85,8 +85,8 @@ export function ReaderList({ readers, page }) {
                             <tr>
                                 <th>Kártyaszám</th>
                                 <th>Név</th>
-                                <th>Email</th>
-                                <th>Telefonszám</th>
+                                <th className="d-none d-md-table-cell">Email</th>
+                                <th className="d-none d-md-table-cell">Telefonszám</th>
                                 <th>...</th>
                             </tr>
                         </thead>
@@ -96,8 +96,8 @@ export function ReaderList({ readers, page }) {
                                     <tr key={item.kartyaszam}>
                                         <td>{item.kartyaszam}</td>
                                         <td>{item.nev}</td>
-                                        <td>{item.email}</td>
-                                        <td>{item.tel}</td>
+                                        <td className="d-none d-md-table-cell">{item.email}</td>
+                                        <td className="d-none d-md-table-cell">{item.tel}</td>
                                         <td>
                                             <Link className="btn btn-outline-primary btn-sm m-1 my-lg-0" to={`/olvasok/${item.kartyaszam}`} title="adatlap"><i className="bi bi-info-lg"></i></Link>
                                             <Link className="btn btn-outline-primary btn-sm m-1 my-lg-0" to={`/kolcsonzesek?kartyaszam=${item.kartyaszam}`} title="kölcsönzések"><i className="bi bi-person-lines-fill"></i></Link>
