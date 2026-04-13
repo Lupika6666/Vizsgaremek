@@ -23,7 +23,7 @@ export function EditBorrowingForm({ borrowing, updateBorrowing }) {
                 <form onSubmit={handleSubmit}>
                     <div className="input-group mb-3">
                         <label className="input-group-text" htmlFor="newBorrowingTime">Kölcsönzés ideje</label>
-                        <input type="date" className="form-control" id="newBorrowingTime" value={borrowingTime} onChange={(e) => setBorrowingTime(e.target.value)} required />
+                        <input type="date" className="form-control" id="newBorrowingTime" value={borrowingTime} disabled />
                     </div>
                     <div className="input-group mb-3">
                         <label className="input-group-text" htmlFor="newDeadline">Határidő</label>
