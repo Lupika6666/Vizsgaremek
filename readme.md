@@ -5,13 +5,13 @@ megtekintsék a könyvtárban található könyveket, és keresést végezzenek 
 
 ## Készítők
 
-- Backend fejlesztők: `Szőke Márk` és `Kiss Bálint László`
-- Frontend fejlesztők: `Diószegi Bence` és `Kiss Bálint László`
-- Adatbázis tervezés: `Szőke Márk` és `Diószegi Bence`
+- Backend fejlesztők: `Szőke Márk (Lupika6666)` és `Kiss Bálint László (SpiritGit0)`
+- Frontend fejlesztők: `Diószegi Bence (Keiichi89)` és `Kiss Bálint László (SpiritGit0)`
+- Adatbázis tervezés: `Szőke Márk (Lupika6666)` és `Diószegi Bence (Keiichi89)`
 
 ## Vállalt feladatok
 
-- `Szőke Márk`: Backend fejlesztés, adatbázis tervezés és kezelés:
+- `Szőke Márk (Lupika6666)`: Backend fejlesztés, adatbázis tervezés és kezelés:
     - Backend alapstruktúra létrehozása
     - Adatbázis integráció és logger implementálása
     - Szerzők, műfajok, nyelvek, könyvek, könyv példányok, kölcsönzés, olvasók és felhasználók kezelése backend oldalon
@@ -20,14 +20,14 @@ megtekintsék a könyvtárban található könyveket, és keresést végezzenek 
     - Teszteléshez szükséges konfigurációk beállítása
 
 
-- `Diószegi Bence`: Frontend fejlesztés és adatbázis tervezés és kezelés:
+- `Diószegi Bence (Keiichi89)`: Frontend fejlesztés és adatbázis tervezés és kezelés:
     - Frontend alapstruktúra létrehozása
     - Szerzők, műfajok, nyelvek, könyvek, könyv példányok, kölcsönzés, olvasók és felhasználók kezelése frontend oldalon
     - Hibakezelés, validáció, autentikáció és autorizáció frontend oldali megvalósítása
     - Design és UI elemek implementálása frontend oldalon
 
 
-- `Kiss Bálint László`: Backend fejlesztés, frontend fejlesztés:
+- `Kiss Bálint László (SpiritGit0)`: Backend fejlesztés, frontend fejlesztés:
     - Folyóiratok és folyóirat példányok kezelése backend oldalon
     - Folyóiratok megjelenítése frontend oldalon
     - Folyóiratokhoz tartozó hiabekezelés, validáció, swagger dokumentáció és tesztelés
