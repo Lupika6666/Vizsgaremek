@@ -18,20 +18,11 @@ export function EditBookForm({ book, languages, authors, genres, updateBook }) {
         e.preventDefault();
 
         const editedBook = new Book(book.id, title, isbn, Number(year), desc, Number(langId), Number(authorId), Number(genreId));
-        console.log(`szerkesztett konyv`);
-        console.log(editedBook);
 
         updateBook(editedBook);
 
-        navigation("/konyvek");
+        navigation(`/konyvek/${book.id}`);
 
-        // setTitle('');
-        // setIsbn('');
-        // setYear('');
-        // setDesc('');
-        // setLangId('');
-        // setAuthorId('');
-        // setGenreId('');
     }
 
     return (

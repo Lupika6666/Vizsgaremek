@@ -14,8 +14,6 @@ export function AddBookForm({ languages, authors, genres, createBook }) {
         e.preventDefault();
 
         const book = new Book(0, title, isbn, Number(year), desc, Number(langId), Number(authorId), Number(genreId));
-        console.log(`uj konyv`);
-        console.log(book);
 
         createBook(book);
 

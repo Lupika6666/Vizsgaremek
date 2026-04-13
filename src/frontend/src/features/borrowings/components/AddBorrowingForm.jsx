@@ -17,7 +17,6 @@ export function AddBorrowingForm({ createBorrowing, cardNumber }) {
         setBorrowingTime('');
         setDeadline('');
         setBookCopyId('');
-        setReaderId('');
     }
 
     return (

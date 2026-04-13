@@ -17,8 +17,6 @@ export function EditBookCopyForm({ bookCopy, updateBookCopy }) {
         updateBookCopy(editedBookCopy);
 
         navigation(`/peldanyok/${bookCopy.id}`);
-
-        // setPlace('');
     }
 
     return (

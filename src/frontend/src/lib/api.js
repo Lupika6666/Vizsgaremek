@@ -41,8 +41,6 @@ api.interceptors.response.use(
                 )
 
                 const { accessToken } = response.data;
-                //konzolra írás TESZTELÉSNÉL
-                console.log(accessToken);
 
                 //új access token mentése
                 localStorage.setItem(ACCESS_TOKEN_STORAGE_KEY, accessToken);
